@@ -24,8 +24,7 @@ const RegisterForm = () => {
 
     return (
         <div className="signup">
-            {error}
-            {message}
+            {error ? error : message}
             <h2 className="signup__heading">Đăng ký</h2>
             <form action="" className="signup__form" onSubmit={handleSubmit(onSubmit)}>
                 <div className="form__group">
