@@ -2,11 +2,20 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: #222222;
 }
 
 .container {
-  width: 1200px;
+  width: 1170px;
   margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
 }
 
 .full-width {

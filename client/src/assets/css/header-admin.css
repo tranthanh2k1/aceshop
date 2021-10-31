@@ -1,0 +1,58 @@
+.admin__pages {
+  background-color: #e5e5e5;
+  height: 100vh;
+}
+
+.admin__header {
+  padding: 25px 40px;
+}
+
+.admin__header-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin__header-title-page {
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 10px 0;
+}
+
+.admin__header-top-right {
+  display: flex;
+}
+
+.admin__header-icon {
+  padding-top: 10px;
+  height: 30px;
+  border-right: 1px solid #ccc;
+  margin-right: 25px;
+}
+
+.admin__header-icon > i {
+  padding: 0 13px;
+}
+
+.admin__header-username {
+  font-size: 0.8rem;
+  margin-right: 10px;
+  position: relative;
+  top: -6px;
+}
+
+.admin__header-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: relative;
+  top: 5px;
+}
+
+.admin__header-content {
+  padding: 30px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  margin-top: 50px;
+  border-radius: 5px;
+  height: 80vh;
+}

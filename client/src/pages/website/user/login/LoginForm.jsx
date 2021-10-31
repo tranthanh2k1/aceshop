@@ -46,7 +46,7 @@ const LoginForm = () => {
                         className="form__input"
                         {...register('email', {
                             required: true,
-                            pattern: /.+\@.+\..+/
+                            pattern: /^([\w]*[\w\.]*(?!\.)@gmail.com)/
                         })}
                     />
                     {errors?.email?.type === "required" && <p className="form__error">Email không đc để trống</p>}
