@@ -1,4 +1,4 @@
-/* =====HEADER-TOP===== */
+/* =====HEADER-TOP=====
 .header__top {
   display: flex;
   flex-wrap: wrap;
@@ -88,7 +88,7 @@
 }
 
 /* =====HEADER-MAIN===== */
-.header__main {
+/* .header__main {
   width: 100%;
   height: 53px;
   background-color: #044cae;
@@ -139,4 +139,4 @@
 .header__account-info {
   padding: 0 10px 0 5px;
   color: rgb(230, 222, 222);
-}
+} */
