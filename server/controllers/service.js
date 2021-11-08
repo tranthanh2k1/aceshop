@@ -48,7 +48,7 @@ exports.create = async (req, res) => {
       }
 
       res.status(200).json({
-        success: false,
+        success: true,
         message: "Thêm dịch vụ thành công",
         service,
       });
@@ -77,7 +77,7 @@ exports.listByParentId = async (req, res) => {
       }
 
       res.status(200).json({
-        success: false,
+        success: true,
         message: "Lấy danh sách danh mục thành công",
         listServiceByParent,
       });
@@ -100,7 +100,7 @@ exports.listByParentId = async (req, res) => {
       }
 
       res.status(200).json({
-        success: false,
+        success: true,
         message: "Lấy danh sách dịch vụ thành công",
         listServiceParent,
       });
@@ -171,7 +171,7 @@ exports.remove = async (req, res) => {
     }
 
     res.status(200).json({
-      success: false,
+      success: true,
       message: "Xóa dịch vụ thành công",
       service,
     });

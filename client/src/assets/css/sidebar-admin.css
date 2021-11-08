@@ -6,6 +6,8 @@
 
 /* === Sidebar Admin === */
 .admin__sidebar {
+  margin-top: 5px;
+  z-index: 10;
 }
 
 .admin__sidebar-logo > img {
@@ -14,33 +16,41 @@
 }
 
 .admin__sidebar-menu {
-  background-color: #363740;
+  background-color: #fff;
   height: 100vh;
 }
 
 .admin__sidebar-menu-nav {
-  padding-top: 30px;
+  padding-top: 20px;
 }
 
 .admin__sidebar-item {
   padding: 16px 25px;
-  color: #a4a6b3;
 }
 
 .admin__sidebar-item:hover {
-  background-color: #454650;
+  background-color: #4b49ac;
   cursor: pointer;
+}
+
+.admin__sidebar-item:hover .admin__sidebar-item-link > i {
+  color: #fff;
+}
+
+.admin__sidebar-item:hover .admin__sidebar-item-title {
+  color: #fff;
 }
 
 .admin__sidebar-item-link {
   display: block;
+  color: #a4a6b3;
 }
 
 .admin__sidebar-item-link > i {
-  color: #a4a6b3;
+  color: #6c7383;
 }
 
 .admin__sidebar-item-title {
-  color: #a4a6b3;
+  color: #6c7383;
   margin-left: 25px;
 }
