@@ -13,7 +13,7 @@ const ServiceSchema = new Schema(
       ref: "Service",
     },
   },
-  { timestamps: true }
+  { timestamps: true } 
 );
 
 module.exports = mongoose.model("Service", ServiceSchema);
