@@ -24,10 +24,18 @@ const BookingSchema = new Schema(
         type:Date,
         required: true,
     },
+    user_id:{
+      type: mongoose.Types.ObjectId,
+      ref: "User",
+  },
     correction_time:{
         type:String,
         required: true,
     },  
+    description:{
+        type:String,
+        required: true,
+    },
   },
   { timestamps: true } 
 );

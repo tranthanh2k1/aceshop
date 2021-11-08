@@ -14,7 +14,7 @@ exports.bookingID = (req, res, next, id) => {
 };
 
 exports.create = async (req, res) => {
-  const { name, email, address, phone , require_time , correction_time } = req.body;
+  const { name, email, address, phone ,user_id, require_time , correction_time ,description} = req.body;
 
   if (!name) {
     return res.status(401).json({
@@ -31,6 +31,9 @@ exports.create = async (req, res) => {
       phone,
       require_time,
       correction_time,
+      user_id,
+      description,
+
     });
 
     newBooking.save((err, booking) => {
