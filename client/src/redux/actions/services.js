@@ -30,7 +30,6 @@ export const listServiceAction = () => async (dispatch) => {
 
 export const removeServiceAction = (id) => async (dispatch) => {
   const data = await remove(id);
-  console.log("dataaction", data);
 
   dispatch({
     type: "DELETE_SERVICE",

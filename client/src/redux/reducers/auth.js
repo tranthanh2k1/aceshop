@@ -28,7 +28,13 @@ const authReducer = (state = initialState, action) => {
         ...state,
       };
     case "GET_USER_LOCALSTORAGE":
-      return state;
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload,
+        message: "",
+        error: "",
+      };
     case "LOGOUT":
       return state;
     default:

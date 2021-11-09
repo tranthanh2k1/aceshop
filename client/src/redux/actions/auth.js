@@ -2,7 +2,6 @@ import { signin } from "../../api/auth";
 
 export const loginAction = (dataForm) => async (dispatch) => {
   const data = await signin(dataForm);
-  //   console.log("dataaction", data);
 
   if (data.success === true) {
     dispatch({
@@ -31,4 +30,13 @@ export const saveUserLocalStorage = (user) => (dispatch) => {
   dispatch({
     type: "SAVE_USER_LOCALSTORAGE",
   });
+};
+
+export const getUserLocalStorage = () => {
+  const data = JSON.parse(localStorage.getItem("user"));
+
+  return {
+    type: "GET_USER_LOCALSTORAGE",
+    payload: data.infoUser,
+  };
 };
