@@ -15,6 +15,7 @@ exports.serviceId = (req, res, next, id) => {
 };
 
 exports.create = async (req, res) => {
+  console.log(req.body)
   const { name, parent_id } = req.body;
 
   if (!name) {

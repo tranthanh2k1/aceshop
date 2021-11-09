@@ -8,10 +8,26 @@ const ServiceSchema = new Schema(
       type: String,
       required: true,
     },
-    parent_id: {
-      type: mongoose.Types.ObjectId,
-      ref: "Service",
+    adress:{
+      type: String,
+      required: true,
     },
+    date: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: Number,
+      required: true,
+    },
+    time: {
+      type: Number,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    }
   },
   { timestamps: true }
 );
