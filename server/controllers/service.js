@@ -159,6 +159,25 @@ exports.update = async (req, res) => {
   }
 };
 
+exports.detail = (req, res) => {
+  const params = req.params.id;
+
+  Service.findOne({ _id: params }).exec((err, detailService) => {
+    if (err) {
+      return res.status(400).json({
+        success: false,
+        message: "Không tìm thấy dịch vụ nào",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Lấy chỉ tiết dịch vụ thành công",
+      detailService,
+    });
+  });
+};
+
 exports.remove = async (req, res) => {
   const service = req.service;
 

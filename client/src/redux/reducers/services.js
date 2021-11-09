@@ -27,6 +27,13 @@ const serviceReducer = (state = initialState, action) => {
         message: action.payload.message,
         error: "",
       };
+    case "UPDATE_SERVICE":
+      return {
+        ...state,
+        listService: [...state.listService, action.payload.data],
+        message: action.payload.message,
+        error: "",
+      };
     case "CALL_API_SERVICES_FAIL":
       return {
         ...state,

@@ -25,6 +25,19 @@ export const create = (data) => {
     .catch((error) => console.log("error", error));
 };
 
+export const update = (id, data) => {
+  return fetch(`${API}/service/${id}`, {
+    method: "PUT",
+    headers: {
+      Accept: "appliaction/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log("error", error));
+};
+
 export const remove = (id) => {
   return fetch(`${API}/service/${id}`, {
     method: "DELETE",

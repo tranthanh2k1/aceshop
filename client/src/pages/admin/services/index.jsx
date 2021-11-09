@@ -5,9 +5,7 @@ import { Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 const ListServicePage = () => {
-
     const { listService } = useSelector(state => state.service)
-    console.log("list", listService)
 
     const dispatch = useDispatch()
 

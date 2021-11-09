@@ -1,4 +1,4 @@
-import { create, list, remove } from "../../api/services";
+import { create, list, remove, update } from "../../api/services";
 
 export const createServiceAction = (dataForm) => async (dispatch) => {
   const data = await create(dataForm);
@@ -39,4 +39,23 @@ export const removeServiceAction = (id) => async (dispatch) => {
       message: data.message,
     },
   });
+};
+
+export const updateServiceAction = (id, dataForm) => async (dispatch) => {
+  const data = await update(id, dataForm);
+
+  if (data.success) {
+    dispatch({
+      type: "UPDATE_SERVICE",
+      payload: {
+        data: data.updatedService,
+        message: data.message,
+      },
+    });
+  } else {
+    dispatch({
+      type: "CALL_API_SERVICES_FAIL",
+      payload: data.message,
+    });
+  }
 };

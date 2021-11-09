@@ -26,6 +26,7 @@ const AddServicePage = () => {
                         type="text"
                         name="name"
                         placeholder='Tên dịch vụ...'
+                        autoFocus
                         className='service__form-input'
                         {...register('name', {
                             required: true

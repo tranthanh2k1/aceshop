@@ -1,11 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useHistory, useParams } from 'react-router-dom'
+import axios from 'axios'
+import { API } from '../../../constants'
+import { useDispatch } from 'react-redux'
+import { updateServiceAction } from '../../../redux/actions/services'
 
 const EditServicePage = () => {
+    const [detailService, setDetailService] = useState([])
+
     const { register, handleSubmit } = useForm()
 
+    const { id } = useParams()
+
+    useEffect(() => {
+        const getService = async () => {
+            const { data } = await axios.get(`${API}/service/${id}`)
+            const { detailService } = data
+
+            setDetailService(detailService)
+        }
+
+        getService()
+    }, [])
+
+    const history = useHistory()
+    const dispatch = useDispatch()
+
     const onSubmit = (dataForm) => {
-        console.log("data", dataForm)
+        dispatch(updateServiceAction(id, dataForm))
+        history.push('/admin/service/list')
     }
 
     return (
@@ -17,6 +41,8 @@ const EditServicePage = () => {
                     <input
                         type="text"
                         name="name"
+                        autoFocus
+                        defaultValue={detailService.name}
                         placeholder='Tên dịch vụ...'
                         className='service__form-input'
                         {...register('name', {
