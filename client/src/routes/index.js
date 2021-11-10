@@ -13,6 +13,7 @@ import HomePage from "../pages/website/home";
 import LoginPage from "../pages/website/user/login";
 import RegisterPage from "../pages/website/user/register";
 import EditServicePage from "../pages/admin/services/edit-service";
+import ListBooking from "../pages/admin/booking";
 
 const Routes = () => {
   return (
@@ -36,7 +37,9 @@ const Routes = () => {
               <Route path="/admin/service/edit/:id">
                 <EditServicePage title="Dịch vụ" />
               </Route>
-              <Route path="/admin/services"></Route>
+              <Route path="/admin/booking/list">
+                <ListBooking />
+              </Route>
             </Switch>
           </LayoutAdmin>
         </Route>

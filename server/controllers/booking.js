@@ -13,14 +13,21 @@ exports.create = async (req, res) => {
     description_error,
     service_id,
   } = req.body;
-  console.log("data", req.body);
 
-  // if (!name) {
-  //   return res.status(401).json({
-  //     success: false,
-  //     message: "Bạn cần nhập đầy đủ thông tin",
-  //   });
-  // }
+  if (
+    !name ||
+    !email ||
+    !address ||
+    !phone ||
+    !require_time ||
+    !correction_time ||
+    !description_error
+  ) {
+    return res.status(401).json({
+      success: false,
+      message: "Bạn cần nhập đầy đủ thông tin",
+    });
+  }
 
   try {
     const newBooking = new Booking({
@@ -117,5 +124,47 @@ exports.updateStatusAdmin = async (req, res) => {
   res.status(200).json({
     success: true,
     updatedStatusBooking,
+  });
+};
+
+exports.listBooking = (req, res) => {
+  Booking.find().exec((err, booking) => {
+    if (err) {
+      return res.status(400).json({
+        success: false,
+        message: "Không tìm thấy đơn đặt lịch nào",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Lấy tất cả danh sách đơn đặt lịch thành công",
+      booking,
+    });
+  });
+};
+
+exports.getBookingStatusUser = (req, res) => {
+  const userId = req.params.userId;
+
+  Booking.find({ user_id: userId, status: "Wait for confirmoation" }).exec(
+    (err, data) => {
+      res.status(200).json(data);
+    }
+  );
+};
+
+// api dành cho user
+exports.getListBookingUser = async (req, res) => {
+  const userId = req.params.userId;
+
+  const listBookingUser = await Booking.find({
+    user_id: userId,
+  });
+
+  res.status(200).json({
+    success: true,
+    message: "Lấy danh sách đơn đặt lịch thành công",
+    listBookingUser,
   });
 };

@@ -26,7 +26,7 @@ const SidebarAdmin = () => {
                             </NavLink>
                         </li>
                         <li className='admin__sidebar-item'>
-                            <NavLink to="#" className='admin__sidebar-item-link'>
+                            <NavLink to="/admin/booking/list" className='admin__sidebar-item-link'>
                                 <i class="bi bi-speedometer2"></i>
                                 <span className='admin__sidebar-item-title'>Booking</span>
                             </NavLink>

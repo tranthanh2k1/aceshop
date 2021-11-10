@@ -19,24 +19,14 @@ const HomePage = () => {
     }, [])
 
     useEffect(() => {
-        dispatch(getUserLocalStorage())
+        user && dispatch(getUserLocalStorage())
     }, [])
 
     const onSubmit = async (dataForm) => {
-        console.log("data", dataForm)
         const dataBooking = {
-            // name: dataForm.name,
-            // phone: dataForm.phone,
-            // email: dataForm.email,
-            // address: dataForm.address,
-            // require_time: dataForm.require_time,
-            // correction_time: dataForm.correction_time,
-            // description_error: dataForm.description_error,
-            // service_id: dataForm.service_id
             ...dataForm,
             user_id: user && user._id
         }
-        // console.log("data", dataBooking)
 
         const data = await axios.post(`${API}/booking`, dataBooking)
     }
