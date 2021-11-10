@@ -6,35 +6,39 @@ const BookingSchema = new Schema(
   {
     name: {
       type: String,
+      // required: true,
+    },
+    email: {
+      type: String,
+      // required: true,
+    },
+    phone: {
+      type: String,
+      // required: true,
+    },
+    address: {
+      type: String,
+      // required: true,
+    },
+    require_time: {
+      type: Date,
       required: true,
     },
-    email:{
-        type: String,
-        required: true, 
-    },
-    phone:{
-      type:String,
-      required: true,
-  },
-    address:{
-        type:String,
-        required: true,
-    },
-    require_time:{
-        type:Date,
-        required: true,
-    },
-    user_id:{
+    user_id: {
       type: mongoose.Types.ObjectId,
       ref: "User",
-  },
-    correction_time:{
-        type:String,
-        required: true,
-    },  
-    description:{
-        type:String,
-        required: true,
+    },
+    correction_time: {
+      type: String,
+      // required: true,
+    },
+    description_error: {
+      type: String,
+      // required: true,
+    },
+    service_id: {
+      type: mongoose.Types.ObjectId,
+      ref: "Service",
     },
     status:{
       type:String,
@@ -47,7 +51,7 @@ const BookingSchema = new Schema(
       ]
   },
 },
-  { timestamps: true } 
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("Booking", BookingSchema);

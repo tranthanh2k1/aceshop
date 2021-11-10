@@ -48,7 +48,7 @@ exports.create = async (req, res) => {
       }
 
       res.status(200).json({
-        success: false,
+        success: true,
         message: "Thêm dịch vụ thành công",
         service,
       });
@@ -77,7 +77,7 @@ exports.listByParentId = async (req, res) => {
       }
 
       res.status(200).json({
-        success: false,
+        success: true,
         message: "Lấy danh sách danh mục thành công",
         listServiceByParent,
       });
@@ -100,7 +100,7 @@ exports.listByParentId = async (req, res) => {
       }
 
       res.status(200).json({
-        success: false,
+        success: true,
         message: "Lấy danh sách dịch vụ thành công",
         listServiceParent,
       });
@@ -159,6 +159,25 @@ exports.update = async (req, res) => {
   }
 };
 
+exports.detail = (req, res) => {
+  const params = req.params.id;
+
+  Service.findOne({ _id: params }).exec((err, detailService) => {
+    if (err) {
+      return res.status(400).json({
+        success: false,
+        message: "Không tìm thấy dịch vụ nào",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Lấy chỉ tiết dịch vụ thành công",
+      detailService,
+    });
+  });
+};
+
 exports.remove = async (req, res) => {
   const service = req.service;
 
@@ -171,7 +190,7 @@ exports.remove = async (req, res) => {
     }
 
     res.status(200).json({
-      success: false,
+      success: true,
       message: "Xóa dịch vụ thành công",
       service,
     });
