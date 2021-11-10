@@ -14,7 +14,7 @@ exports.bookingID = (req, res, next, id) => {
 };
 
 exports.create = async (req, res) => {
-  const { name, email, address, phone ,user_id, require_time , correction_time ,description} = req.body;
+  const { name, email, address, phone ,user_id, require_time , correction_time ,description, status} = req.body;
 
   if (!name) {
     return res.status(401).json({
@@ -33,7 +33,7 @@ exports.create = async (req, res) => {
       correction_time,
       user_id,
       description,
-
+      status:"Wait for confirmoation",
     });
 
     newBooking.save((err, booking) => {
@@ -57,4 +57,48 @@ exports.create = async (req, res) => {
       message: "Lỗi server",
     });
   }
+  exports.update = async (req, res) => {
+    const { name, email, address, phone ,user_id, require_time , correction_time ,description, status} = req.body;
+  
+    if (!name) {
+      return res.status(401).json({
+        success: false,
+        message: "Bạn cần nhập đầy đủ thông tin",
+      });
+    }
+  
+    try {
+      let updatedService = {
+        name,
+        parent_id: parent_id || null,
+      };
+  
+      const serviceUpdateCondition = { _id: req.params.id };
+  
+      updatedService = await Service.findOneAndUpdate(
+        serviceUpdateCondition,
+        updatedService,
+        { new: true }
+      );
+  
+      if (!updatedService) {
+        return res.status(401).json({
+          success: false,
+          message: "Update dịch vụ không thành công",
+        });
+      }
+  
+      res.status(200).json({
+        success: true,
+        message: "Update dịch vụ thành công",
+        updatedService,
+      });
+    } catch (error) {
+      console.log("error", error);
+      res.status(500).json({
+        success: false,
+        message: "Lỗi server",
+      });
+    }
+  };
 };

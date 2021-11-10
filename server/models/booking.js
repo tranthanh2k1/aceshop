@@ -36,7 +36,17 @@ const BookingSchema = new Schema(
         type:String,
         required: true,
     },
+    status:{
+      type:String,
+      enum:[
+        "Wait for confirmoation" ,
+        "Successful appointment", 
+        "Fixing",
+        "Completing an appointment",
+        "Cancellation of booking",
+      ]
   },
+},
   { timestamps: true } 
 );
 
