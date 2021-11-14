@@ -128,7 +128,27 @@ exports.updateStatusAdmin = async (req, res) => {
 };
 
 exports.listBooking = (req, res) => {
-  Booking.find().exec((err, booking) => {
+  Booking.find()
+    .sort({ _id: -1 })
+    .exec((err, booking) => {
+      if (err) {
+        return res.status(400).json({
+          success: false,
+          message: "Không tìm thấy đơn đặt lịch nào",
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: "Lấy tất cả danh sách đơn đặt lịch thành công",
+        booking,
+      });
+    });
+};
+
+exports.detailBooking = (req, res) => {
+  const id = req.params.id;
+
+  Booking.findById(id, (err, detailBooking) => {
     if (err) {
       return res.status(400).json({
         success: false,
@@ -138,8 +158,8 @@ exports.listBooking = (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Lấy tất cả danh sách đơn đặt lịch thành công",
-      booking,
+      message: "Lấy chi tiết đơn đặt lịch thành công",
+      detailBooking,
     });
   });
 };

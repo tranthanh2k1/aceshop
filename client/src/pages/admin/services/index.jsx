@@ -28,7 +28,7 @@ const ListServicePage = () => {
                         <th>#</th>
                         <th>Dịch vụ</th>
                         <th>
-                            <Link to='/admin/service/add'>Thêm dịch vụ</Link>
+                            <Link to='/admin/service/add' className='btn btn-success'>Thêm dịch vụ</Link>
                         </th>
                     </tr>
                 </thead>
@@ -38,8 +38,8 @@ const ListServicePage = () => {
                             <th scope="row">{index}</th>
                             <td>{item.name}</td>
                             <td>
-                                <Link to={`/admin/service/edit/${item._id}`}>Sửa</Link>
-                                <button onClick={() => handleRemove(item._id)}>Xóa</button>
+                                <Link to={`/admin/service/edit/${item._id}`} className='btn btn-primary'>Sửa</Link>
+                                <button onClick={() => handleRemove(item._id)} className='btn btn-danger ml-1'>Xóa</button>
                             </td>
                         </tr>
                     ))}

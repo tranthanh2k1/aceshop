@@ -14,6 +14,7 @@ import LoginPage from "../pages/website/user/login";
 import RegisterPage from "../pages/website/user/register";
 import EditServicePage from "../pages/admin/services/edit-service";
 import ListBooking from "../pages/admin/booking";
+import DetailBookingPage from "../pages/admin/booking/detail-booking";
 
 const Routes = () => {
   return (
@@ -39,6 +40,9 @@ const Routes = () => {
               </Route>
               <Route path="/admin/booking/list">
                 <ListBooking />
+              </Route>
+              <Route path="/admin/booking/detail/:id">
+                <DetailBookingPage />
               </Route>
             </Switch>
           </LayoutAdmin>

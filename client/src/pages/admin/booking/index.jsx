@@ -16,17 +16,17 @@ const ListBooking = () => {
 
     return (
         <div>
-            <h3 className='admin__page-title'>Danh sách dịch vụ</h3>
+            <h3 className='admin__page-title'>Danh sách đơn đặt lịch</h3>
             <Table
             >
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Tên</th>
-                        <th>Sđt</th>
+                        <th>Trạng thái</th>
                         <th>Thời gian đặt lịch</th>
                         <th>
-                            <Link to='/admin/service/add'>Thêm dịch vụ</Link>
+                            {/* <Link to='/admin/service/add'>Thêm dịch vụ</Link> */}
                         </th>
                     </tr>
                 </thead>
@@ -35,21 +35,21 @@ const ListBooking = () => {
                         <tr key={index}>
                             <th scope="row">{index}</th>
                             <td>{item.name}</td>
-                            <td>{item.phone}</td>
+                            <td>{item.status}</td>
                             <td>
-                                <Moment parse="YYYY-MM-DD HH:mm">
+                                <Moment format="hh:mm' DD/MM/YYYY">
                                     {item.createdAt}
                                 </Moment>
                             </td>
                             <td>
-                                <Link to={`/admin/service/edit/${item._id}`}>Sửa</Link>
+                                <Link to={`/admin/booking/detail/${item._id}`} className='btn btn-success'>Xem chi tiết</Link>
                                 {/* <button onClick={() => handleRemove(item._id)}>Xóa</button> */}
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
-        </div>
+        </div >
     )
 }
 

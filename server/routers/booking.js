@@ -5,13 +5,16 @@ const {
   getBookingStatusUser,
   getListBookingUser,
   listBooking,
+  detailBooking,
 } = require("../controllers/booking.js");
 const router = express.Router();
 
+// admin
 router.post("/booking", create);
+router.get("/booking", listBooking);
+router.get("/booking/detail/:id", detailBooking);
 router.put("/booking/:id", updateStatusAdmin);
 router.get("/booking/status/:userId", getBookingStatusUser);
-router.get("/booking", listBooking);
 
 //user
 router.get("/booking/:userId", getListBookingUser);
