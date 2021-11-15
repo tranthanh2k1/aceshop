@@ -15,12 +15,12 @@ exports.create = async (req, res) => {
   } = req.body;
   console.log("data", req.body);
 
-  // if (!name) {
-  //   return res.status(401).json({
-  //     success: false,
-  //     message: "Bạn cần nhập đầy đủ thông tin",
-  //   });
-  // }
+  if (!name) {
+    return res.status(401).json({
+      success: false,
+      message: "Bạn cần nhập đầy đủ thông tin",
+    });
+  }
 
   try {
     const newBooking = new Booking({
@@ -92,36 +92,55 @@ exports.create = async (req, res) => {
     });
   }
 }
-  exports.updateStatusAdmin = async (req, res) => {
-    const params = req.params.id;
-    const { status } = req.body;
 
-    let updatedStatusBooking = {
-      status,
-    };
+exports.updateStatusAdmin = async (req, res) => {
+  const params = req.params.id;
+  const { status } = req.body;
 
-    updatedStatusBooking = await Booking.findOneAndUpdate(
-      { _id: params },
-      updatedStatusBooking,
-      { new: true }
+  let updatedStatusBooking = {
+    status,
+  };
+
+  updatedStatusBooking = await Booking.findOneAndUpdate(
+    { _id: params },
+    updatedStatusBooking,
+    { new: true }
+  );
+
+  if (!updatedStatusBooking) {
+    return res.status(401).json({
+      success: false,
+      message: "Update trạng thái không thành công",
+    });
+  }
+
+  res.status(200).json({
+    success: true,
+    updatedStatusBooking,
+  });
+};
+
+exports.listBooking = (req, res) => {
+
+  Booking.find().exec((err, booking) => {
+    res.status(200).json(booking)
+  });
+}
+
+exports.listBookingUser = async (req, res) => {
+    const params = req.params.userId;
+    listBookingUser = await Booking.find(
+      { user_id: params },
     );
-
-    if (!updatedStatusBooking) {
+    if (!listBookingUser) {
       return res.status(401).json({
         success: false,
-        message: "Update trạng thái không thành công",
+        message: "List danh sách không thành công",
       });
     }
-
     res.status(200).json({
       success: true,
-      updatedStatusBooking,
+      listBookingUser,
     });
   };
-  exports.listBooking =  (req, res) => {
 
-    Booking.find().exec((err, booking) => {
-      res.status(200).json(booking)
-    });
-
-  };
