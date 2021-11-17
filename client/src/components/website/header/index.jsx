@@ -55,16 +55,15 @@ const Header = () => {
                     </button> */}
 
                     <div className="navbar-collapse">
-
                         <ul className="navbar-nav">
-                            <li className="nav-item active"><a href="index.html" className="nav-link">Home</a></li>
-                            <li className="nav-item"><a href="about.html" className="nav-link">About</a></li>
-                            <li className="nav-item"><a href="team.html" className="nav-link">Team</a></li>
-                            <li className="nav-item"><a href="services.html" className="nav-link">Services</a></li>
-                            <li className="nav-item"><a href="department.html" className="nav-link">Departments</a></li>
-                            <li className="nav-item"><a href="gallery.html" className="nav-link">Gallery</a></li>
-                            <li className="nav-item"><a href="blog.html" className="nav-link">Blog</a></li>
-                            <li className="nav-item"><a href="contact.html" className="nav-link">Contact</a></li>
+                            <li className="nav-item active"><Link to="/" className="nav-link">Home</Link></li>
+                            <li className="nav-item"><Link to="about.html" className="nav-link">About</Link></li>
+                            <li className="nav-item"><Link to="team.html" className="nav-link">Team</Link></li>
+                            <li className="nav-item"><Link to="services.html" className="nav-link">Services</Link></li>
+                            <li className="nav-item"><Link to="department.html" className="nav-link">Departments</Link></li>
+                            <li className="nav-item"><Link to="gallery.html" className="nav-link">Gallery</Link></li>
+                            <li className="nav-item"><Link to="blog.html" className="nav-link">Blog</Link></li>
+                            <li className="nav-item"><Link to="contact.html" className="nav-link">Contact</Link></li>
                         </ul>
                     </div>
                     <div className="order-lg-last">
@@ -72,7 +71,6 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-
         </>
     );
 }

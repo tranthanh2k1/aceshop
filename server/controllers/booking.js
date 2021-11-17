@@ -8,7 +8,7 @@ exports.create = async (req, res) => {
     address,
     phone,
     user_id,
-    require_time,
+    repair_time,
     correction_time,
     description_error,
     service_id,
@@ -19,7 +19,7 @@ exports.create = async (req, res) => {
     !email ||
     !address ||
     !phone ||
-    !require_time ||
+    !repair_time ||
     !correction_time ||
     !description_error
   ) {
@@ -35,7 +35,7 @@ exports.create = async (req, res) => {
       email,
       address,
       phone,
-      require_time,
+      repair_time,
       correction_time,
       user_id,
       description_error,

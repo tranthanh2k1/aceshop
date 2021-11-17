@@ -20,9 +20,9 @@ const BookingSchema = new Schema(
       type: String,
       // required: true,
     },
-    require_time: {
+    repair_time: {
       type: Date,
-      required: true,
+      // required: true,
     },
     user_id: {
       type: mongoose.Types.ObjectId,
