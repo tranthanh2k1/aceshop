@@ -1,18 +1,49 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import LayoutAdmin from "../layouts/admin";
 import LayoutWebsite from "../layouts/website";
+import AdminDashboard from "../pages/admin/dashboard";
+import AddServicePage from "../pages/admin/services/add-service";
+import ListServicePage from "../pages/admin/services";
 import HomePage from "../pages/website/home";
 import LoginPage from "../pages/website/user/login";
 import RegisterPage from "../pages/website/user/register";
+import EditServicePage from "../pages/admin/services/edit-service";
+import ListBooking from "../pages/admin/booking";
+import DetailBookingPage from "../pages/admin/booking/detail-booking";
 
 const Routes = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/admin">
+        <Route path="/admin/:path?/:path?">
           <LayoutAdmin>
             <Switch>
-              <Route path="/admin/services"></Route>
+              <Route exact path="/admin">
+                <Redirect to="/admin/dashboard" />
+              </Route>
+              <Route path="/admin/dashboard">
+                <AdminDashboard title="Dịch vụ" />
+              </Route>
+              <Route path="/admin/service/list">
+                <ListServicePage title="Dịch vụ" />
+              </Route>
+              <Route path="/admin/service/add">
+                <AddServicePage title="Dịch vụ" />
+              </Route>
+              <Route path="/admin/service/edit/:id">
+                <EditServicePage title="Dịch vụ" />
+              </Route>
+              <Route path="/admin/booking/list">
+                <ListBooking />
+              </Route>
+              <Route path="/admin/booking/detail/:id">
+                <DetailBookingPage />
+              </Route>
             </Switch>
           </LayoutAdmin>
         </Route>

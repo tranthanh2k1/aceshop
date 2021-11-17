@@ -1,0 +1,56 @@
+/* === Layout Admin === */
+.admin {
+  display: grid;
+  grid-template-columns: 18% auto;
+}
+
+/* === Sidebar Admin === */
+.admin__sidebar {
+  margin-top: 5px;
+  z-index: 10;
+}
+
+.admin__sidebar-logo > img {
+  width: 50px;
+  height: 50px;
+}
+
+.admin__sidebar-menu {
+  background-color: #fff;
+  height: 100vh;
+}
+
+.admin__sidebar-menu-nav {
+  padding-top: 20px;
+}
+
+.admin__sidebar-item {
+  padding: 16px 25px;
+}
+
+.admin__sidebar-item:hover {
+  background-color: #4b49ac;
+  cursor: pointer;
+}
+
+.admin__sidebar-item:hover .admin__sidebar-item-link > i {
+  color: #fff;
+}
+
+.admin__sidebar-item:hover .admin__sidebar-item-title {
+  color: #fff;
+}
+
+.admin__sidebar-item-link {
+  display: block;
+  color: #a4a6b3;
+}
+
+.admin__sidebar-item-link > i {
+  color: #6c7383;
+}
+
+.admin__sidebar-item-title {
+  color: #6c7383;
+  margin-left: 25px;
+}

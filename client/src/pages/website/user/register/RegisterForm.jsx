@@ -24,8 +24,7 @@ const RegisterForm = () => {
 
     return (
         <div className="signup">
-            {error}
-            {message}
+            {error ? error : message}
             <h2 className="signup__heading">Đăng ký</h2>
             <form action="" className="signup__form" onSubmit={handleSubmit(onSubmit)}>
                 <div className="form__group">
@@ -49,10 +48,12 @@ const RegisterForm = () => {
                         id="phone"
                         className="form__input"
                         {...register('phone', {
-                            required: true
+                            required: true,
+                            pattern: /((09|03|07|08|05)+([0-9]{8})\b)/g
                         })}
                     />
                     {errors?.phone?.type === "required" && <p className="form__error">Sđt không đc để trống</p>}
+                    {errors?.phone?.type === "pattern" && (<p className="form__error">Sđt chưa đúng định dạng</p>)}
                 </div>
                 <div className="form__group">
                     <label htmlFor="" className="label__form">Email của bạn:</label>
@@ -63,7 +64,7 @@ const RegisterForm = () => {
                         className="form__input"
                         {...register('email', {
                             required: true,
-                            pattern: /.+\@.+\..+/
+                            pattern: /^([\w]*[\w\.]*(?!\.)@gmail.com)/
                         })}
                     />
                     {errors?.email?.type === "required" && <p className="form__error">Email không đc để trống</p>}

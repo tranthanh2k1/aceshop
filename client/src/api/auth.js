@@ -1,7 +1,6 @@
 import { API } from "../constants";
 
 export const signup = (data) => {
-  console.log(API);
   return fetch(`${API}/register`, {
     method: "POST",
     headers: {

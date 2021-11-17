@@ -1,0 +1,142 @@
+/* =====HEADER-TOP=====
+.header__top {
+  display: flex;
+  flex-wrap: wrap;
+  height: 110px;
+  padding: 17px 0 15px 0;
+}
+
+.header__top-logo {
+  width: 450px;
+  margin: auto 0;
+}
+
+.header__top-logo > img {
+  width: 50px;
+  height: 50px;
+}
+
+.header__top-search {
+  position: relative;
+  width: 400px;
+  line-height: 57px;
+}
+
+.header__top-input-search {
+  border: none;
+  border-bottom: 1px solid #adadad;
+  padding: 10px 0 10px 30px;
+  outline: none;
+}
+
+.header__top-btn-search {
+  border: none;
+  background-color: #fff;
+}
+
+.header__top-btn-search > i {
+  position: absolute;
+  left: 0;
+  top: 23px;
+  font-size: 1rem;
+}
+
+.header__top-book {
+  width: 160px;
+  margin: auto 0;
+  display: flex;
+}
+
+.header__top-book > i {
+  font-size: 2rem;
+  margin-right: 10px;
+}
+
+.header__top-book > p {
+  width: 70px;
+  text-align: right;
+  font-size: 0.9rem;
+}
+
+.header__top-hotline {
+  display: flex;
+  width: 160px;
+  margin: auto 0;
+}
+
+.hotline__info {
+  margin-left: 10px;
+}
+
+.hotline__icon-phone {
+  margin: 5px 5px 0 0;
+}
+
+.hotline__icon-phone > i {
+  font-size: 1.5rem;
+}
+
+.hotline__info-title {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+.hotline__info-phone {
+  color: #e71b1b;
+  font-size: 1.3rem;
+  font-weight: bolder;
+}
+
+/* =====HEADER-MAIN===== */
+/* .header__main {
+  width: 100%;
+  height: 53px;
+  background-color: #044cae;
+}
+
+.header__main-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__menu-list {
+  display: flex;
+}
+
+.header__menu-item {
+  line-height: 53px;
+  padding: 0 25px;
+}
+
+.header__menu-list > li:first-child {
+  padding: 0 5px;
+}
+
+.header__menu-list > li:first-child > a > i {
+  color: #fff;
+  font-size: 1rem;
+}
+
+.header__menu-item:nth-child(2) {
+  margin-left: -10px;
+}
+
+.header__menu-item > a {
+  color: rgb(230, 222, 222);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.header__account {
+  display: flex;
+  line-height: 53px;
+}
+
+.header__account-icon > a > i {
+  color: #fff;
+}
+
+.header__account-info {
+  padding: 0 10px 0 5px;
+  color: rgb(230, 222, 222);
+} */
