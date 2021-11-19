@@ -39,10 +39,10 @@ const BookingSchema = new Schema(
     status: {
       type: String,
       enum: [
-        "Wait for confirmoation",
-        "Successful appointment",
+        "Wait for confirmation",
+        "Confirm",
         "Fixing",
-        "Completing an appointment",
+        "Successful fix",
         "Cancellation of booking",
       ],
     },
