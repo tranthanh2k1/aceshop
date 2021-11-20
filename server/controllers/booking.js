@@ -8,7 +8,7 @@ exports.create = async (req, res) => {
     address,
     phone,
     user_id,
-    require_time,
+    repair_time,
     correction_time,
     description_error,
     service_id,
@@ -19,7 +19,7 @@ exports.create = async (req, res) => {
     !email ||
     !address ||
     !phone ||
-    !require_time ||
+    !repair_time ||
     !correction_time ||
     !description_error
   ) {
@@ -35,11 +35,11 @@ exports.create = async (req, res) => {
       email,
       address,
       phone,
-      require_time,
+      repair_time,
       correction_time,
       user_id,
       description_error,
-      status: "Wait for confirmoation",
+      status: "Wait for confirmation",
       service_id,
     });
 
@@ -164,27 +164,116 @@ exports.detailBooking = (req, res) => {
   });
 };
 
-exports.getBookingStatusUser = (req, res) => {
-  const userId = req.params.userId;
+/*
+ * Module này sẽ trả về danh sách tất cả đơn đặt lịch của user đó
+ */
+exports.getListBookingUser = async (req, res) => {
+  const user = req.userId;
 
-  Booking.find({ user_id: userId, status: "Wait for confirmoation" }).exec(
-    (err, data) => {
-      res.status(200).json(data);
+  Booking.find({ user_id: user._id }).exec((err, listBooking) => {
+    if (err) {
+      return res.status(400).json({
+        success: false,
+        message: "Không tìm thấy đơn đặt lịch nào",
+      });
     }
-  );
+
+    res.status(200).json({
+      success: true,
+      message: "Lấy danh sách đơn đặt lịch thành công",
+      listBooking,
+    });
+  });
 };
 
-// api dành cho user
-exports.getListBookingUser = async (req, res) => {
-  const userId = req.params.userId;
+/*
+ * Module này sẽ trả về danh sách tất cả đơn đặt lịch của user đó theo trạng thái
+ */
+exports.getBookingStatusUser = (req, res) => {
+  const user = req.userId;
 
-  const listBookingUser = await Booking.find({
-    user_id: userId,
-  });
+  const { status } = req.body;
 
-  res.status(200).json({
-    success: true,
-    message: "Lấy danh sách đơn đặt lịch thành công",
-    listBookingUser,
-  });
+  if (status === "Wait for confirmation") {
+    Booking.find({ status, user_id: user._id }).exec((err, listBooking) => {
+      if (err) {
+        return res.status(400).json({
+          success: false,
+          message: "Không tìm thấy đơn đặt lịch nào",
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Lấy danh sách đơn đặt lịch thành công",
+        listBooking,
+      });
+    });
+  } else if (status === "Confirm") {
+    Booking.find({ status, user_id: user._id }).exec((err, listBooking) => {
+      if (err) {
+        return res.status(400).json({
+          success: false,
+          message: "Không tìm thấy đơn đặt lịch nào",
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Lấy danh sách đơn đặt lịch thành công",
+        listBooking,
+      });
+    });
+  } else if (status === "Fixing") {
+    Booking.find({ status, user_id: user._id }).exec((err, listBooking) => {
+      if (err) {
+        return res.status(400).json({
+          success: false,
+          message: "Không tìm thấy đơn đặt lịch nào",
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Lấy danh sách đơn đặt lịch thành công",
+        listBooking,
+      });
+    });
+  } else if (status === "Successful fix") {
+    Booking.find({ status, user_id: user._id }).exec((err, listBooking) => {
+      if (err) {
+        return res.status(400).json({
+          success: false,
+          message: "Không tìm thấy đơn đặt lịch nào",
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Lấy danh sách đơn đặt lịch thành công",
+        listBooking,
+      });
+    });
+  } else if (status === "Cancellation of booking") {
+    Booking.find({ status, user_id: user._id }).exec((err, listBooking) => {
+      if (err) {
+        return res.status(400).json({
+          success: false,
+          message: "Không tìm thấy đơn đặt lịch nào",
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Lấy danh sách đơn đặt lịch thành công",
+        listBooking,
+      });
+    });
+  } else {
+    return res.status(400).json({
+      success: false,
+      message:
+        "Không tìm thấy trạng thái nào trùng với trạng thái đơn đặt lịch",
+    });
+  }
 };

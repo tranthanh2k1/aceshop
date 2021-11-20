@@ -39,6 +39,11 @@ const DetailBookingPage = () => {
                     <p>Trạng thái: {detailBooking.status}</p>
                 </>
             )}
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
         </div>
     )
 }

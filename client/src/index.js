@@ -11,6 +11,8 @@ import "./assets/css/header-admin.css";
 import "./assets/css/sidebar-admin.css";
 import "./assets/css/service.css";
 
+import "./assets/css/service.css";
+import "./style.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 // setup store and redux-devtools redux
