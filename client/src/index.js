@@ -10,6 +10,7 @@ import "./assets/css/header-website.css";
 import "./assets/css/header-admin.css";
 import "./assets/css/sidebar-admin.css";
 import "./assets/css/service.css";
+import "./assets/css/booking-admin.css";
 
 import "./assets/css/service.css";
 import "./style.css";

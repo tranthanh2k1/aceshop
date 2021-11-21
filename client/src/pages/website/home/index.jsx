@@ -19,7 +19,7 @@ const HomePage = () => {
     }, [])
 
     useEffect(() => {
-        user && dispatch(getUserLocalStorage())
+        dispatch(getUserLocalStorage())
     }, [])
 
     const onSubmit = async (dataForm, e) => {
