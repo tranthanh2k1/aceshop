@@ -23,7 +23,7 @@ const ListBooking = () => {
         } else if (status === 'Confirm') {
             return {
                 content: 'Xác nhận',
-                bgr: '#2980b9'
+                bgr: '#45aaf2'
             }
         } else if (status === 'Fixing') {
             return {

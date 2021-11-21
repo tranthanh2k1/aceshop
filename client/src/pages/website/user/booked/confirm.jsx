@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { isAuthenticated } from '../../../../api/auth'
-import { API } from '../../../../constants'
 import axios from 'axios'
+import { API } from '../../../../constants'
 
-const WaitForComfirmationPage = () => {
+const ConfirmBookingUser = () => {
     const [listAllBookingUser, setListAllBookingUser] = useState([])
 
     const { token } = isAuthenticated()
-    console.log(token)
 
     useEffect(() => {
         const getListBookingUser = async () => {
-            const { data } = await axios.post(`${API}/booking/user/status`, { status: "Wait for confirmation" }, {
+            const { data } = await axios.post(`${API}/booking/user/status`, { status: "Confirm" }, {
                 headers: {
                     Accept: "appliaction/json",
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 }
             })
-            console.log(data)
 
             setListAllBookingUser(data.listBooking)
         }
@@ -33,4 +31,4 @@ const WaitForComfirmationPage = () => {
     )
 }
 
-export default WaitForComfirmationPage
+export default ConfirmBookingUser

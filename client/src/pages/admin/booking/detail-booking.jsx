@@ -99,7 +99,7 @@ const DetailBookingPage = () => {
             </button>
             <button
                 className='btn-booking-status-admin'
-                style={{ backgroundColor: '#2980b9', color: '#fff', opacity: `${isDisableConfirm === '' ? '1' : '0.3'}` }}
+                style={{ backgroundColor: '#45aaf2', color: '#fff', opacity: `${isDisableConfirm === '' ? '1' : '0.3'}` }}
                 disabled={isDisableConfirm}
                 onClick={() => handleUpdateStatus('Confirm')}
             >
@@ -107,7 +107,7 @@ const DetailBookingPage = () => {
             </button>
             <button
                 className='btn-booking-status-admin'
-                style={{ backgroundColor: '#27ae60', color: '#fff', opacity: `${isDisableFixing === '' ? '1' : '0.3'}` }}
+                style={{ backgroundColor: '#2980b9', color: '#fff', opacity: `${isDisableFixing === '' ? '1' : '0.3'}` }}
                 disabled={isDisableFixing}
                 onClick={() => handleUpdateStatus('Fixing')}
             >

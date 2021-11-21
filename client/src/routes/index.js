@@ -20,7 +20,7 @@ import ListBookedFixingUser from "../pages/website/user/booked/fixing";
 import BookedUserPage from "../pages/website/user/booked/bookedUserRoute";
 import WaitForComfirmationPage from "../pages/website/user/booked/wait-confirmation";
 import SuccessfullBookedPage from "../pages/website/user/booked/successfull";
-import CompletingBookedUserpage from "../pages/website/user/booked/completing-booked";
+import ConfirmBookingUser from "../pages/website/user/booked/confirm";
 import CencelledBookedUserPage from "../pages/website/user/booked/cencelled";
 
 const Routes = () => {
@@ -75,13 +75,13 @@ const Routes = () => {
                     <WaitForComfirmationPage />
                   </Route>
                   <Route exact path="/user/booked/type2">
-                    <SuccessfullBookedPage />
+                    <ConfirmBookingUser />
                   </Route>
                   <Route exact path="/user/booked/type3">
                     <ListBookedFixingUser />
                   </Route>
                   <Route exact path="/user/booked/type4">
-                    <CompletingBookedUserpage />
+                    <SuccessfullBookedPage />
                   </Route>
                   <Route exact path="/user/booked/type5">
                     <CencelledBookedUserPage />
