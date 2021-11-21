@@ -1,0 +1,170 @@
+body {
+    font-family: "Lato", Arial, sans-serif;
+    background: white;
+    font-weight: 400;
+    color: gray;
+    margin: 0px;
+    background: rgb(252, 251, 251);
+  }
+  .container {
+    width: 100%;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+  p {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+  }
+  ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+  }
+  
+  .booking-main {
+    display: flex;
+  }
+  .booking-main .main-left {
+    width: 20%;
+  }
+  .booking-main .main-left .profile-user {
+    display: flex;
+    border-bottom: 1px solid rgb(231, 231, 231);
+    padding: 18px 0;
+  }
+  .booking-main .main-left .profile-user .avt-user {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid rgb(189, 187, 187);
+    display: flex;
+  }
+  .booking-main .main-left .profile-user .avt-user .icon {
+    margin: auto;
+    font-size: 25px;
+    color: rgb(189, 187, 187);
+  }
+  .booking-main .main-left .profile-user .desc-user {
+    line-height: 1.4rem;
+    margin-left: 15px;
+    font-size: 14px;
+    margin-top: 3px;
+  }
+  .booking-main .main-left .profile-user .desc-user .user-name {
+    font-weight: bold;
+    color: black;
+  }
+  .booking-main .main-left .profile-user .desc-user .user-edit {
+    cursor: pointer;
+  }
+  .booking-main .main-left .profile-user .desc-user .user-edit .icon {
+    font-size: 12px;
+  }
+  .booking-main .main-left .list-setting-desc {
+    margin-top: 20px;
+  }
+  .booking-main .main-left .list-setting-desc ul li {
+    list-style: none;
+    padding: 10px 0px;
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .booking-main .main-left .list-setting-desc ul li span {
+    display: inline-block;
+    margin-right: 15px;
+    color: rgb(3, 73, 179);
+    font-size: 16px;
+  }
+  .booking-main .main-left .list-setting-desc ul li:hover {
+    color: red;
+  }
+  .booking-main .main-right {
+    width: 80%;
+    padding-left: 30px;
+  }
+  .booking-main .main-right .booking-nav {
+    background: white;
+    display: flex;
+  }
+  .booking-main .main-right .booking-nav a {
+    padding: 16px 0;
+    font-size: 16px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.8);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.09);
+    flex: 1;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+    text-decoration: none;
+  }
+  .booking-main .main-right .booking-nav a:hover {
+    color: red;
+  }
+  .booking-main .main-right .booking-nav .active {
+    border-bottom: 2px solid red;
+  }
+  .booking-main .main-right .form {
+    padding: 12px 0;
+    margin: 12px 0;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 5%);
+    color: #212121;
+    background: #eaeaea;
+    border-radius: 2px;
+  }
+  .booking-main .main-right .form span {
+    font-size: 20px;
+    margin: 0 15px;
+  }
+  .booking-main .main-right .form input {
+    flex: 1;
+    font-size: 14px;
+    line-height: 16px;
+    border: 0;
+    outline: none;
+    background-color: inherit;
+  }
+  
+  @media only screen and (min-width: 1201px) {
+    .container {
+      max-width: 1140px;
+    }
+  }
+  @media only screen and (max-width: 1200px) and (min-width: 992px) {
+    .container {
+      max-width: 960px;
+    }
+  }
+  
+  @media only screen and (max-width: 991px) and (min-width: 768px) {
+    .container {
+      max-width: 720px;
+    }
+  }
+  
+  @media only screen and (max-width: 767px) and (min-width: 576px) {
+    .container {
+      max-width: 540px;
+    }
+  }
+  

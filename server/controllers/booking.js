@@ -289,6 +289,7 @@ exports.detailBooking = (req, res) => {
 /*
  * Module này sẽ trả về danh sách tất cả đơn đặt lịch của user đó
  */
+
 exports.getListBookingUser = async (req, res) => {
   const user = req.userId;
 
@@ -311,7 +312,15 @@ exports.getListBookingUser = async (req, res) => {
 /*
  * Module này sẽ trả về danh sách tất cả đơn đặt lịch của user đó theo trạng thái
  */
+
+exports.checkIdBooking = (req, res, next) => {
+    const Idbooking = req.body
+    console.log(Idbooking);
+    // Booking.findById(())
+}
+
 exports.getBookingStatusUser = (req, res) => {
+
   const user = req.userId;
 
   const { status } = req.body;
