@@ -13,6 +13,7 @@ import "./assets/css/service.css";
 
 import "./assets/css/service.css";
 import "./style.css";
+import "./assets/css/booking.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 // setup store and redux-devtools redux
