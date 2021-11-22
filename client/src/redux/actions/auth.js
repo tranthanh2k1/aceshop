@@ -34,6 +34,7 @@ export const saveUserLocalStorage = (user) => (dispatch) => {
 
 export const getUserLocalStorage = () => {
   const data = JSON.parse(localStorage.getItem("user"));
+  console.log(data);
 
   return {
     type: "GET_USER_LOCALSTORAGE",

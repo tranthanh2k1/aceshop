@@ -39,7 +39,7 @@ exports.create = async (req, res) => {
       correction_time,
       user_id,
       description_error,
-      status: "Wait for confirmoation",
+      status: "Wait for confirmation",
       service_id,
     });
 
@@ -100,31 +100,153 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.updateStatusAdmin = async (req, res) => {
-  const params = req.params.id;
+exports.updateBookingStatusAdmin = async (req, res) => {
+  const bookingId = req.params.bookingId;
+
   const { status } = req.body;
 
-  let updatedStatusBooking = {
-    status,
-  };
+  const getBookingDB = await Booking.findOne({ _id: bookingId });
 
-  updatedStatusBooking = await Booking.findOneAndUpdate(
-    { _id: params },
-    updatedStatusBooking,
-    { new: true }
-  );
+  let updatedStatusBookingAdmin;
 
-  if (!updatedStatusBooking) {
-    return res.status(401).json({
-      success: false,
-      message: "Update trạng thái không thành công",
-    });
+  switch (status) {
+    case "Wait for confirmation":
+      return res.status(401).json({
+        success: false,
+        message: "Không thể update status đơn đặt lịch này",
+      });
+    case "Confirm":
+      if (getBookingDB.status === "Wait for confirmation") {
+        updatedStatusBookingAdmin = {
+          status,
+        };
+
+        updatedStatusBookingAdmin = await Booking.findOneAndUpdate(
+          { _id: bookingId },
+          updatedStatusBookingAdmin,
+          { new: true }
+        );
+
+        if (!updatedStatusBookingAdmin) {
+          return res.status(401).json({
+            success: false,
+            message: "Update status booking fail",
+          });
+        }
+
+        res.status(200).json({
+          success: true,
+          message: "Update status booking success",
+          updatedStatusBookingAdmin,
+        });
+      } else {
+        return res.status(401).json({
+          success: false,
+          message: "Không thể update status này",
+        });
+      }
+    case "Fixing":
+      if (getBookingDB.status === "Confirm") {
+        updatedStatusBookingAdmin = {
+          status,
+        };
+
+        updatedStatusBookingAdmin = await Booking.findOneAndUpdate(
+          { _id: bookingId },
+          updatedStatusBookingAdmin,
+          { new: true }
+        );
+
+        if (!updatedStatusBookingAdmin) {
+          return res.status(401).json({
+            success: false,
+            message: "Update status booking fail",
+          });
+        }
+
+        res.status(200).json({
+          success: true,
+          message: "Update status booking success",
+          updatedStatusBookingAdmin,
+        });
+      } else {
+        return res.status(401).json({
+          success: false,
+          message: "Không thể update status này",
+        });
+      }
+    case "Successful fix":
+      if (getBookingDB.status === "Fixing") {
+        updatedStatusBookingAdmin = {
+          status,
+        };
+
+        updatedStatusBookingAdmin = await Booking.findOneAndUpdate(
+          { _id: bookingId },
+          updatedStatusBookingAdmin,
+          { new: true }
+        );
+
+        if (!updatedStatusBookingAdmin) {
+          return res.status(401).json({
+            success: false,
+            message: "Update status booking fail",
+          });
+        }
+
+        res.status(200).json({
+          success: true,
+          message: "Update status booking success",
+          updatedStatusBookingAdmin,
+        });
+      } else {
+        return res.status(401).json({
+          success: false,
+          message: "Không thể update status này",
+        });
+      }
+    case "Cancellation of booking":
+      if (
+        getBookingDB.status === "Wait for confirmation" ||
+        getBookingDB.status === "Confirm" ||
+        getBookingDB.status === "Fixing" ||
+        getBookingDB.status === "Successful fix"
+      ) {
+        updatedStatusBookingAdmin = {
+          status,
+        };
+
+        updatedStatusBookingAdmin = await Booking.findOneAndUpdate(
+          { _id: bookingId },
+          updatedStatusBookingAdmin,
+          { new: true }
+        );
+
+        if (!updatedStatusBookingAdmin) {
+          return res.status(401).json({
+            success: false,
+            message: "Update status booking fail",
+          });
+        }
+
+        res.status(200).json({
+          success: true,
+          message: "Update status booking success",
+          updatedStatusBookingAdmin,
+        });
+      } else {
+        return res.status(401).json({
+          success: false,
+          message: "Không thể update status này",
+        });
+      }
+    default:
+      return res.status(400).json({
+        success: false,
+        message:
+          "Không tìm thấy trạng thái nào trùng với trạng thái đơn đặt lịch",
+      });
   }
-
-  res.status(200).json({
-    success: true,
-    updatedStatusBooking,
-  });
 };
 
 exports.listBooking = (req, res) => {
@@ -164,27 +286,64 @@ exports.detailBooking = (req, res) => {
   });
 };
 
-exports.getBookingStatusUser = (req, res) => {
-  const userId = req.params.userId;
+/*
+ * Module này sẽ trả về danh sách tất cả đơn đặt lịch của user đó
+ */
 
-  Booking.find({ user_id: userId, status: "Wait for confirmoation" }).exec(
-    (err, data) => {
-      res.status(200).json(data);
+exports.getListBookingUser = async (req, res) => {
+  const user = req.userId;
+
+  Booking.find({ user_id: user._id }).exec((err, listBooking) => {
+    if (err) {
+      return res.status(400).json({
+        success: false,
+        message: "Không tìm thấy đơn đặt lịch nào",
+      });
     }
-  );
+
+    res.status(200).json({
+      success: true,
+      message: "Lấy danh sách đơn đặt lịch thành công",
+      listBooking,
+    });
+  });
 };
 
-// api dành cho user
-exports.getListBookingUser = async (req, res) => {
-  const userId = req.params.userId;
+/*
+ * Module này sẽ trả về danh sách tất cả đơn đặt lịch của user đó theo trạng thái
+ */
+exports.getBookingStatusUser = (req, res) => {
+  const user = req.userId;
 
-  const listBookingUser = await Booking.find({
-    user_id: userId,
-  });
+  const { status } = req.body;
+  console.log(status);
 
-  res.status(200).json({
-    success: true,
-    message: "Lấy danh sách đơn đặt lịch thành công",
-    listBookingUser,
-  });
+  if (
+    status === "Wait for confirmation" ||
+    status === "Confirm" ||
+    status === "Fixing" ||
+    status === "Successful fix" ||
+    status === "Cancellation of booking"
+  ) {
+    Booking.find({ status, user_id: user._id }).exec((err, listBooking) => {
+      if (err) {
+        return res.status(400).json({
+          success: false,
+          message: "Không tìm thấy đơn đặt lịch nào",
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Lấy danh sách đơn đặt lịch thành công",
+        listBooking,
+      });
+    });
+  } else {
+    return res.status(400).json({
+      success: false,
+      message:
+        "Không tìm thấy trạng thái nào trùng với trạng thái đơn đặt lịch",
+    });
+  }
 };
