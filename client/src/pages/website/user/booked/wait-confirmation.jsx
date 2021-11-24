@@ -28,7 +28,7 @@ const WaitForComfirmationPage = () => {
 
     return (
         <div>
-            {JSON.stringify(listAllBookingUser)}
+           
         </div>
     )
 }

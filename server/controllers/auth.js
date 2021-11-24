@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
   const { username, email, password } = req.body;
-
   // Validation
   if (!username || !email || !password) {
     return res.status(400).json({
@@ -12,17 +11,14 @@ exports.register = async (req, res) => {
       message: "Bạn cần nhập đầy đủ thông tin",
     });
   }
-
   try {
     const user = await User.findOne({ email });
-
     if (user) {
       return res.status(400).json({
         success: false,
         message: "Email đã tồn tại",
       });
     }
-
     // Mã hóa password
     const hassed_password = await argon2.hash(password);
     const newUser = new User({ username, email, password: hassed_password });
@@ -34,7 +30,6 @@ exports.register = async (req, res) => {
           message: "Đăng kí tài khoản không thành công",
         });
       }
-
       res.status(200).json({
         success: true,
         message: "Đăng kí tài khoản thành công",
@@ -48,6 +43,8 @@ exports.register = async (req, res) => {
     });
   }
 };
+
+
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
