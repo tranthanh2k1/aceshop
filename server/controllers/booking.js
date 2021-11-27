@@ -2,27 +2,8 @@ const Booking = require("../models/booking.js");
 const nodemailer = require("nodemailer");
 
 exports.create = async (req, res) => {
-  const {
-    name,
-    email,
-    address,
-    phone,
-    user_id,
-    repair_time,
-    correction_time,
-    description_error,
-    service_id,
-  } = req.body;
-
-  if (
-    !name ||
-    !email ||
-    !address ||
-    !phone ||
-    !repair_time ||
-    !correction_time ||
-    !description_error
-  ) {
+  const { name, email, address, phone, user_id, repair_time, correction_time, description_error, service_id, } = req.body;
+  if (!name || !email || !address || !phone || !repair_time || !correction_time || !description_error) {
     return res.status(401).json({
       success: false,
       message: "Bạn cần nhập đầy đủ thông tin",
@@ -31,14 +12,7 @@ exports.create = async (req, res) => {
 
   try {
     const newBooking = new Booking({
-      name,
-      email,
-      address,
-      phone,
-      repair_time,
-      correction_time,
-      user_id,
-      description_error,
+      name, email, address, phone, repair_time, correction_time, user_id, description_error,
       status: "Wait for confirmation",
       service_id,
     });
@@ -326,7 +300,6 @@ exports.detailBooking = (req, res) => {
 /*
  * Module này sẽ trả về danh sách tất cả đơn đặt lịch của user đó
  */
-
 exports.getListBookingUser = async (req, res) => {
   const user = req.userId;
 
@@ -353,7 +326,8 @@ exports.getBookingStatusUser = (req, res) => {
   const user = req.userId;
 
   const { status } = req.body;
-  console.log(status);
+
+  // console.log(status);
 
   if (
     status === "Wait for confirmation" ||

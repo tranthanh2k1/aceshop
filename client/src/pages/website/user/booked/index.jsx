@@ -28,6 +28,7 @@ const ListAllBookedUserPage = () => {
     return (
         <div>
             {JSON.stringify(listAllBookingUser)}
+            
         </div>
     )
 }

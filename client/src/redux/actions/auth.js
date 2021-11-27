@@ -38,6 +38,6 @@ export const getUserLocalStorage = () => {
 
   return {
     type: "GET_USER_LOCALSTORAGE",
-    payload: data.infoUser,
+    // payload: data.infoUser,
   };
 };
