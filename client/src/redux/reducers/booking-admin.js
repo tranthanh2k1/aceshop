@@ -1,6 +1,7 @@
 const initialState = {
   listBooking: [],
   detailBooking: null,
+  totalPage: null,
   message: "",
   error: "",
 };
@@ -12,7 +13,8 @@ const bookingAdminReducer = (state = initialState, action) => {
     case "LIST_ALL_BOOKING":
       return {
         ...state,
-        listBooking: payload,
+        listBooking: payload.data,
+        totalPage: payload.totalPage,
         detailBooking: null,
         message: "",
         error: "",

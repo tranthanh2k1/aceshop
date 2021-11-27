@@ -3,8 +3,8 @@ import { isAuthenticated } from "./auth";
 
 const { token } = isAuthenticated();
 
-export const listAllApi = () => {
-  return fetch(`${API}/booking`, {
+export const listAllApi = (page) => {
+  return fetch(`${API}/booking?page=${page}`, {
     method: "GET",
     headers: {
       Accept: "appliaction/json",

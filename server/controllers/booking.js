@@ -250,21 +250,58 @@ exports.updateBookingStatusAdmin = async (req, res) => {
 };
 
 exports.listBooking = (req, res) => {
-  Booking.find()
-    .sort({ _id: -1 })
-    .exec((err, booking) => {
-      if (err) {
-        return res.status(400).json({
-          success: false,
-          message: "Không tìm thấy đơn đặt lịch nào",
+  let page = req.query.page;
+
+  const page_size = 10;
+
+  if (page) {
+    page = parseInt(page);
+    if (page < 1) {
+      page = 1;
+    }
+
+    const qtySkip = (page - 1) * page_size;
+
+    Booking.find({})
+      .sort({ _id: -1 })
+      .skip(qtySkip)
+      .limit(page_size)
+      .exec((err, booking) => {
+        if (err) {
+          return res.status(400).json({
+            success: false,
+            message: "Không tìm thấy đơn đặt lịch nào",
+          });
+        }
+
+        Booking.countDocuments({}).then((total) => {
+          const totalPage = Math.ceil(total / page_size);
+
+          res.status(200).json({
+            success: true,
+            message: "Lấy tất cả danh sách đơn đặt lịch thành công",
+            booking,
+            totalPage,
+          });
         });
-      }
-      res.status(200).json({
-        success: true,
-        message: "Lấy tất cả danh sách đơn đặt lịch thành công",
-        booking,
       });
-    });
+  } else {
+    Booking.find({})
+      .sort({ _id: -1 })
+      .exec((err, booking) => {
+        if (err) {
+          return res.status(400).json({
+            success: false,
+            message: "Không tìm thấy đơn đặt lịch nào",
+          });
+        }
+        res.status(200).json({
+          success: true,
+          message: "Lấy tất cả danh sách đơn đặt lịch thành công",
+          booking,
+        });
+      });
+  }
 };
 
 exports.detailBooking = (req, res) => {

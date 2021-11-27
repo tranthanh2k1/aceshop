@@ -4,13 +4,13 @@ import {
   updateStatusAdminApi,
 } from "../../api/booking";
 
-export const getListBookingAll = () => async (dispatch) => {
-  const data = await listAllApi();
+export const getListBookingAll = (page) => async (dispatch) => {
+  const data = await listAllApi(page);
 
   if (data.success) {
     dispatch({
       type: "LIST_ALL_BOOKING",
-      payload: data.booking,
+      payload: { data: data.booking, totalPage: data.totalPage },
     });
   }
 };
