@@ -1,22 +1,30 @@
 const express = require("express");
 const {
   create,
-  updateStatusAdmin,
+  updateBookingStatusAdmin,
   getBookingStatusUser,
   getListBookingUser,
   listBooking,
   detailBooking,
+  cancelBooking
 } = require("../controllers/booking.js");
+const { verifyToken, isAdmin } = require("../middleware/auth.js");
 const router = express.Router();
 
-// admin
-router.post("/booking", create);
+// api admin
 router.get("/booking", listBooking);
 router.get("/booking/detail/:id", detailBooking);
-router.put("/booking/:id", updateStatusAdmin);
-router.get("/booking/status/:userId", getBookingStatusUser);
+router.put(
+  "/booking/updateStatus/:bookingId",
+  verifyToken,
+  isAdmin,
+  updateBookingStatusAdmin
+);
 
-//user
-router.get("/booking/:userId", getListBookingUser);
+// api user
+router.post("/booking", create);
+router.post("/booking/:bookingId",verifyToken, cancelBooking);
+router.get("/booking/user", verifyToken, getListBookingUser);
+router.get("/booking/user/status", verifyToken, getBookingStatusUser);
 
 module.exports = router;

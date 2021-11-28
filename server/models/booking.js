@@ -20,9 +20,9 @@ const BookingSchema = new Schema(
       type: String,
       // required: true,
     },
-    require_time: {
+    repair_time: {
       type: Date,
-      required: true,
+      // required: true,
     },
     user_id: {
       type: mongoose.Types.ObjectId,
@@ -39,10 +39,10 @@ const BookingSchema = new Schema(
     status: {
       type: String,
       enum: [
-        "Wait for confirmoation",
-        "Successful appointment",
+        "Wait for confirmation",
+        "Confirm",
         "Fixing",
-        "Completing an appointment",
+        "Successful fix",
         "Cancellation of booking",
       ],
     },

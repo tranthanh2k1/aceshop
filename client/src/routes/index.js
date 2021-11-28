@@ -15,6 +15,13 @@ import RegisterPage from "../pages/website/user/register";
 import EditServicePage from "../pages/admin/services/edit-service";
 import ListBooking from "../pages/admin/booking";
 import DetailBookingPage from "../pages/admin/booking/detail-booking";
+import ListAllBookedUserPage from "../pages/website/user/booked";
+import ListBookedFixingUser from "../pages/website/user/booked/fixing";
+import BookedUserPage from "../pages/website/user/booked/bookedUserRoute";
+import WaitForComfirmationPage from "../pages/website/user/booked/wait-confirmation";
+import SuccessfullBookedPage from "../pages/website/user/booked/successfull";
+import ConfirmBookingUser from "../pages/website/user/booked/confirm";
+import CencelledBookedUserPage from "../pages/website/user/booked/cencelled";
 
 const Routes = () => {
   return (
@@ -26,22 +33,22 @@ const Routes = () => {
               <Route exact path="/admin">
                 <Redirect to="/admin/dashboard" />
               </Route>
-              <Route path="/admin/dashboard">
+              <Route exact path="/admin/dashboard">
                 <AdminDashboard title="Dịch vụ" />
               </Route>
-              <Route path="/admin/service/list">
+              <Route exact path="/admin/service/list">
                 <ListServicePage title="Dịch vụ" />
               </Route>
-              <Route path="/admin/service/add">
+              <Route exact path="/admin/service/add">
                 <AddServicePage title="Dịch vụ" />
               </Route>
-              <Route path="/admin/service/edit/:id">
+              <Route exact path="/admin/service/edit/:id">
                 <EditServicePage title="Dịch vụ" />
               </Route>
-              <Route path="/admin/booking/list">
+              <Route exact path="/admin/booking/list">
                 <ListBooking />
               </Route>
-              <Route path="/admin/booking/detail/:id">
+              <Route exact path="/admin/booking/detail/:id">
                 <DetailBookingPage />
               </Route>
             </Switch>
@@ -59,6 +66,28 @@ const Routes = () => {
               <Route exact path="/login">
                 <LoginPage />
               </Route>
+              <BookedUserPage>
+                <Switch>
+                  <Route exact path="/user/booked">
+                    <ListAllBookedUserPage />
+                  </Route>
+                  <Route exact path="/user/booked/type1">
+                    <WaitForComfirmationPage />
+                  </Route>
+                  <Route exact path="/user/booked/type2">
+                    <ConfirmBookingUser />
+                  </Route>
+                  <Route exact path="/user/booked/type3">
+                    <ListBookedFixingUser />
+                  </Route>
+                  <Route exact path="/user/booked/type4">
+                    <SuccessfullBookedPage />
+                  </Route>
+                  <Route exact path="/user/booked/type5">
+                    <CencelledBookedUserPage />
+                  </Route>
+                </Switch>
+              </BookedUserPage>
             </Switch>
           </LayoutWebsite>
         </Route>
