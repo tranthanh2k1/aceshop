@@ -6,6 +6,7 @@ const {
   getListBookingUser,
   listBooking,
   detailBooking,
+  cancelBooking
 } = require("../controllers/booking.js");
 const { verifyToken, isAdmin } = require("../middleware/auth.js");
 const router = express.Router();
@@ -22,7 +23,8 @@ router.put(
 
 // api user
 router.post("/booking", create);
+router.post("/booking/:bookingId",verifyToken, cancelBooking);
 router.get("/booking/user", verifyToken, getListBookingUser);
-router.post("/booking/user/status", verifyToken, getBookingStatusUser);
+router.get("/booking/user/status", verifyToken, getBookingStatusUser);
 
 module.exports = router;

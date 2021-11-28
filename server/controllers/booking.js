@@ -315,7 +315,7 @@ exports.getListBookingUser = async (req, res) => {
 exports.getBookingStatusUser = (req, res) => {
   const user = req.userId;
 
-  const { status } = req.body;
+  const status  = req.query.status;
   console.log(status);
 
   if (
@@ -346,4 +346,45 @@ exports.getBookingStatusUser = (req, res) => {
         "Không tìm thấy trạng thái nào trùng với trạng thái đơn đặt lịch",
     });
   }
+};
+
+// cancelBooking
+exports.cancelBooking = async (req, res) => {
+  const bookingId = req.params.bookingId;
+
+  const getBookingDB = await Booking.findOne({ _id: bookingId });
+  
+  if (!getBookingDB)
+    return res.status(404).json({
+      success: false,
+      message: "Không tìm thấy booking",
+    });
+
+  if (getBookingDB.status !== "Wait for confirmation" && getBookingDB.status !== "Confirmed")
+    return res.status(500).json({
+      success: false,
+      message: "trạng thái đơn hàng không hợp lệ",
+    });
+
+    let updatedStatusBookingAdmin  = {
+      status: "Cancellation of booking"
+    };
+    updatedStatusBookingAdmin = await Booking.findOneAndUpdate(
+      { _id: bookingId },
+      updatedStatusBookingAdmin,
+      { new: true }
+    );
+
+    if (!updatedStatusBookingAdmin) {
+      return res.status(400).json({
+        success: false,
+        message: "Cancel booking fail",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Cancel booking success",
+      updatedStatusBookingAdmin,
+    });
 };
