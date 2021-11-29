@@ -40,3 +40,16 @@ export const updateStatusAdminApi = (dataReq, id) => {
     .then((response) => response.json())
     .catch((error) => console.log("error", error));
 };
+
+export const listAllBookingStatusApi = (status) => {
+  return fetch(`${API}/booking/status`, {
+    method: "POST",
+    headers: {
+      Accept: "appliaction/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(status),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log("error", error));
+};

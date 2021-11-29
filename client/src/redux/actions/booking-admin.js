@@ -2,6 +2,7 @@ import {
   detailBookingApi,
   listAllApi,
   updateStatusAdminApi,
+  listAllBookingStatusApi,
 } from "../../api/booking";
 
 export const getListBookingAll = (page) => async (dispatch) => {
@@ -44,3 +45,19 @@ export const updateStatusBookingAdminAction =
       });
     }
   };
+
+export const listAllBookingStatusAction = (status) => async (dispatch) => {
+  const data = await listAllBookingStatusApi(status);
+
+  if (data.success) {
+    dispatch({
+      type: "LIST_ALL_BOOKING_STATUS",
+      payload: data.listBookingStatus,
+    });
+  } else {
+    dispatch({
+      type: "UDATED_STATUS_BOOKING_API_FAIL",
+      payload: data.message,
+    });
+  }
+};
