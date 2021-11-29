@@ -64,8 +64,14 @@ exports.create = async (req, res) => {
       content += `
         <div style="padding: 10px; background-color: #003375">
             <div style="padding: 10px; background-color: white;">
-                <h4 style="color: #0085ff">Gửi mail với nodemailer và express</h4>
-                <span style="color: black">${name}Đây là mail test</span>
+                <h4 style="color: #0085ff">MAIL THÔNG BÁO ĐƠN ĐẶT LỊCH</h4>
+                <span style="color: black">Họ và Tên:${name}</span>
+                <span style="color: black">Email: ${email}</span>
+                <span style="color: black">Số điên thoại:${phone}</span>
+                <span style="color: black">Địa chỉ:${address}</span>
+                <span style="color: black">Dịch vụ sửa chữa:${service_id}</span>
+                <span style="color: black">Ngày sửa:${correction_time}</span>
+                <p> Cảm ơn bạn đã đặt lịch sửa chữa tại cửa hàng chúng tôi, chúc bạn có một ngày mới vui vẻ !!</p>
             </div>
         </div>
     `;
@@ -128,19 +134,41 @@ exports.listBooking = (req, res) => {
 }
 
 exports.listBookingUser = async (req, res) => {
-    const params = req.params.userId;
-    listBookingUser = await Booking.find(
-      { user_id: params },
-    );
-    if (!listBookingUser) {
-      return res.status(401).json({
-        success: false,
-        message: "List danh sách không thành công",
-      });
-    }
-    res.status(200).json({
-      success: true,
-      listBookingUser,
+  const params = req.params.userId;
+  listBookingUser = await Booking.find(
+    { user_id: params },
+  );
+  if (!listBookingUser) {
+    return res.status(401).json({
+      success: false,
+      message: "List danh sách không thành công",
     });
-  };
+  }
+  res.status(200).json({
+    success: true,
+    listBookingUser,
+  })
+};
+
+exports.listBookingUserStatus = async (req, res) => {
+  const params = req.params.userId;
+  const { status } = req.body;
+
+
+  listBookingUserStatus = await Booking.find(
+    { user_id: params },
+  );
+
+  if (!listBookingUserStatus) {
+    return res.status(401).json({
+      success: false,
+      message: "List danh sách không thành công",
+    });
+  }
+  res.status(200).json({
+    success: true,
+    listBookingUserStatus,
+  });
+
+};
 
