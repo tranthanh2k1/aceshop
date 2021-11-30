@@ -14,12 +14,9 @@ exports.verifyToken = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-
     req.userId = decoded;
-
     next();
   } catch (error) {
-    console.log(error);
     res.status(403).json({
       success: false,
       message: "Token không hợp lệ",
@@ -34,6 +31,5 @@ exports.isAdmin = (req, res, next) => {
       message: "Bạn không có quyền",
     });
   }
-
   next();
 };

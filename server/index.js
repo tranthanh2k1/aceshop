@@ -7,8 +7,9 @@ const cors = require("cors");
 const authRoutes = require("./routers/auth.js");
 const serviceRoutes = require("./routers/service.js");
 const bookingRouters = require("./routers/booking.js");
-
-const quoteRouters = require("./routers/quote.js")
+const quoteRouters = require("./routers/quote.js");
+const userRouters = require("./routers/userRouter.js")
+ 
 dotenv.config();
 const app = express();
 
@@ -35,7 +36,8 @@ app.use(cors());
 app.use("/api", authRoutes);
 app.use("/api", serviceRoutes);
 app.use("/api", bookingRouters);
-app.use('/api',quoteRouters);
+app.use('/api', quoteRouters);
+app.use('/api', userRouters);
 
 const PORT = process.env.PORT || 5500;
 

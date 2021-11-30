@@ -32,17 +32,17 @@ const SidebarAdmin = () => {
                             </NavLink>
                         </li>
                         <li className='admin__sidebar-item'>
-                            <NavLink to="#" className='admin__sidebar-item-link'>
+                            <NavLink to="/admin/user/listUser" className='admin__sidebar-item-link'>
                                 <i class="bi bi-speedometer2"></i>
                                 <span className='admin__sidebar-item-title'>Users</span>
                             </NavLink>
                         </li>
-                        <li className='admin__sidebar-item'>
+                        {/* <li className='admin__sidebar-item'>
                             <NavLink to="#" className='admin__sidebar-item-link'>
                                 <i class="bi bi-speedometer2"></i>
                                 <span className='admin__sidebar-item-title'>Agents</span>
                             </NavLink>
-                        </li>
+                        </li> */}
                     </ul>
                 </nav>
             </div>

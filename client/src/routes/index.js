@@ -6,15 +6,22 @@ import {
 } from "react-router-dom";
 import LayoutAdmin from "../layouts/admin";
 import LayoutWebsite from "../layouts/website";
+
 import AdminDashboard from "../pages/admin/dashboard";
 import AddServicePage from "../pages/admin/services/add-service";
 import ListServicePage from "../pages/admin/services";
+import EditServicePage from "../pages/admin/services/edit-service";
+
+import ListBooking from "../pages/admin/booking";
+import DetailBookingPage from "../pages/admin/booking/detail-booking";
+
+import ListUserPage from "../pages/admin/user/listUser";
+import AddUserPage from "../pages/admin/user/addUser";
+import EditUserPage from "../pages/admin/user/editUser";
+
 import HomePage from "../pages/website/home";
 import LoginPage from "../pages/website/user/login";
 import RegisterPage from "../pages/website/user/register";
-import EditServicePage from "../pages/admin/services/edit-service";
-import ListBooking from "../pages/admin/booking";
-import DetailBookingPage from "../pages/admin/booking/detail-booking";
 import ListAllBookedUserPage from "../pages/website/user/booked";
 import ListBookedFixingUser from "../pages/website/user/booked/fixing";
 import BookedUserPage from "../pages/website/user/booked/bookedUserRoute";
@@ -51,9 +58,19 @@ const Routes = () => {
               <Route exact path="/admin/booking/detail/:id">
                 <DetailBookingPage />
               </Route>
+              <Route exact path="/admin/user/listUser">
+                <ListUserPage title="User" />
+              </Route>
+              <Route exact path="/admin/user/addUser">
+                <AddUserPage />
+              </Route>
+              <Route exact path="/admin/user/edit/:id">
+                <EditUserPage />
+              </Route>
             </Switch>
           </LayoutAdmin>
         </Route>
+
         <Route path="/">
           <LayoutWebsite>
             <Switch>
