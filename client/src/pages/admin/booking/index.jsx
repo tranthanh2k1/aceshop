@@ -96,6 +96,10 @@ const ListBooking = () => {
     return (
         <div>
             <h3 className='admin__page-title'>Danh sách đơn đặt lịch</h3>
+            <form action='/admin/booking/search'>
+                <input type="text" placeholder='Tìm kiếm...' name="code" />
+                <button type='submit'>TÌm kiếm</button>
+            </form>
             <select
                 className="form-select my-4"
                 name="status"
@@ -125,7 +129,7 @@ const ListBooking = () => {
                 <tbody>
                     {listBooking.map((item, index) => (
                         <tr key={index}>
-                            <th scope="row">{index + 1}</th>
+                            <th>{item.code_bill}</th>
                             <td>{item.name}</td>
                             <td>
                                 <Moment format="hh:mm' DD/MM/YYYY">

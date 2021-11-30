@@ -69,12 +69,12 @@ const DetailBookingPage = () => {
 
     return (
         <div>
-            <h3 className='admin__page-title'>Chi tiết đơn đặt lịch</h3>
             {error && alert(error)}
             {message && alert(message)}
             {checkMessage()}
             {detailBooking && (
                 <>
+                    <h3 className='admin__page-title'>Chi tiết đơn đặt lịch #{detailBooking.code_bill}</h3>
                     <p>Tên người dùng: {detailBooking.name}</p>
                     <p>Email: {detailBooking.email}</p>
                     <p>Số điện thoại: {detailBooking.phone}</p>
