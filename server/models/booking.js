@@ -4,6 +4,9 @@ const Schema = mongoose.Schema;
 
 const BookingSchema = new Schema(
   {
+    code_bill: {
+      type: String,
+    },
     name: {
       type: String,
       // required: true,

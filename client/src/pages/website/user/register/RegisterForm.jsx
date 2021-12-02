@@ -35,10 +35,12 @@ const RegisterForm = () => {
                         id="username"
                         className="form__input"
                         {...register('username', {
-                            required: true
+                            required: true,
+                           
                         })}
                     />
                     {errors?.username?.type === "required" && <p className="form__error">Username không đc để trống</p>}
+                    
                 </div>
                 <div className="form__group">
                     <label htmlFor="" className="label__form">Điện thoại:</label>

@@ -67,7 +67,7 @@ const Header = () => {
                         </ul>
                     </div>
                     <div className="order-lg-last">
-                        <a href="#" className="btn btn-primary">Make an appointment</a>
+                        <Link to="/register" className="btn btn-primary">Register</Link>
                     </div>
                 </div>
             </div>

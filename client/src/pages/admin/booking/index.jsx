@@ -1,18 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Table } from 'reactstrap';
-import { getListBookingAll } from '../../../redux/actions/booking-admin';
+import { getListBookingAll, listAllBookingStatusAction } from '../../../redux/actions/booking-admin';
 import Moment from 'react-moment';
 
 const ListBooking = () => {
-    const { listBooking } = useSelector(state => state.bookingAdmin)
+    const { listBooking, totalPage } = useSelector(state => state.bookingAdmin)
 
     const dispatch = useDispatch()
 
+    const useQuery = () => {
+        return new URLSearchParams(useLocation().search);
+    }
+
+    let query = useQuery().get("page");
+
     useEffect(() => {
-        dispatch(getListBookingAll())
-    }, [])
+        if (query) {
+            dispatch(getListBookingAll(query))
+        } else {
+            dispatch(getListBookingAll(1))
+        }
+    }, [query])
 
     const convertStatusString = (status) => {
         if (status === 'Wait for confirmation') {
@@ -43,9 +53,66 @@ const ListBooking = () => {
         }
     }
 
+    const dataOption = [
+        {
+            value: "Wait for confirmation",
+            content: "Chờ xác nhận"
+        },
+        {
+            value: "Confirm",
+            content: "Xác nhận"
+        },
+        {
+            value: "Fixing",
+            content: "Đang sửa"
+        },
+        {
+            value: "Successful fix",
+            content: "Sửa thành công"
+        },
+        {
+            value: "Cancellation of booking",
+            content: "Đã hủy"
+        },
+    ]
+
+    const paginationRef = useRef(null)
+
+    const handleSelectStatus = (e) => {
+        if (e.target.value === 'all') {
+            paginationRef.current.style.display = 'block'
+            return dispatch(getListBookingAll(1))
+        }
+
+        const dataReq = {
+            status: e.target.value
+        }
+
+        dispatch(listAllBookingStatusAction(dataReq))
+
+        paginationRef.current.style.display = 'none'
+    }
+
     return (
         <div>
             <h3 className='admin__page-title'>Danh sách đơn đặt lịch</h3>
+            <form action='/admin/booking/search'>
+                <input type="text" placeholder='Tìm kiếm...' name="code" />
+                <button type='submit'>TÌm kiếm</button>
+            </form>
+            <select
+                className="form-select my-4"
+                name="status"
+                aria-label="Default select example"
+                onChange={handleSelectStatus}
+            >
+                <option selected value="all">---Tất cả---</option>
+                {dataOption.map(item => (
+                    <>
+                        <option key={item.value} value={item.value}>{item.content}</option>
+                    </>
+                ))}
+            </select>
             <Table
             >
                 <thead>
@@ -62,7 +129,7 @@ const ListBooking = () => {
                 <tbody>
                     {listBooking.map((item, index) => (
                         <tr key={index}>
-                            <th scope="row">{index}</th>
+                            <th>{item.code_bill}</th>
                             <td>{item.name}</td>
                             <td>
                                 <Moment format="hh:mm' DD/MM/YYYY">
@@ -82,6 +149,38 @@ const ListBooking = () => {
                     ))}
                 </tbody>
             </Table>
+            <nav aria-label="Page navigation example" ref={paginationRef}>
+                <ul className="pagination">
+                    <li className="page-item">
+                        {query > 1 && (
+                            <Link
+                                className='page-link'
+                                to={`/admin/booking/list?page=${Number(query) - 1}`}
+                            >
+                                Previous
+                            </Link>
+                        )}
+                    </li>
+                    {Array(totalPage).fill(1).map((item, index) => (
+                        <li className="page-item" key={index}>
+                            <Link
+                                className="page-link"
+                                to={`/admin/booking/list?page=${index + 1}`}
+                            >{index + 1}</Link>
+                        </li>
+                    ))}
+                    <li className="page-item">
+                        {query < totalPage && (
+                            <Link
+                                className="page-link"
+                                to={`/admin/booking/list?page=${Number(query) + 1}`}
+                            >
+                                Next
+                            </Link>
+                        )}
+                    </li>
+                </ul>
+            </nav>
         </div >
     )
 }

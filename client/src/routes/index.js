@@ -29,6 +29,7 @@ import WaitForComfirmationPage from "../pages/website/user/booked/wait-confirmat
 import SuccessfullBookedPage from "../pages/website/user/booked/successfull";
 import ConfirmBookingUser from "../pages/website/user/booked/confirm";
 import CencelledBookedUserPage from "../pages/website/user/booked/cencelled";
+import SearchBookingAdmin from "../pages/admin/booking/search-booking";
 
 const Routes = () => {
   return (
@@ -58,6 +59,7 @@ const Routes = () => {
               <Route exact path="/admin/booking/detail/:id">
                 <DetailBookingPage />
               </Route>
+
               <Route exact path="/admin/user/listUser">
                 <ListUserPage title="User" />
               </Route>
@@ -66,6 +68,9 @@ const Routes = () => {
               </Route>
               <Route exact path="/admin/user/edit/:id">
                 <EditUserPage />
+              </Route>
+              <Route exact path="/admin/booking/search">
+                <SearchBookingAdmin />
               </Route>
             </Switch>
           </LayoutAdmin>

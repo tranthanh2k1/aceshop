@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { listServiceAction } from '../../../redux/actions/services'
@@ -7,17 +7,17 @@ import { API } from '../../../constants'
 import { getUserLocalStorage } from '../../../redux/actions/auth'
 
 const HomePage = () => {
-    const { register, handleSubmit } = useForm()
-
+    const { register, handleSubmit, formState: { errors } } = useForm()
     const { listService } = useSelector(state => state.service)
     const { user } = useSelector(state => state.auth)
-
     const dispatch = useDispatch()
+
+    const [error, setError] = useState("")
+    const [message, setMessage] = useState("")
 
     useEffect(() => {
         dispatch(listServiceAction())
     }, [])
-
     useEffect(() => {
         dispatch(getUserLocalStorage())
     }, [])
@@ -31,8 +31,13 @@ const HomePage = () => {
         const { data } = await axios.post(`${API}/booking`, dataBooking)
 
         if (data.success) {
-            alert(data.message)
             e.target.reset()
+            setError("")
+            setMessage(data.message)
+            alert(data.message)
+        } else {
+            setError(data.message)
+            alert(data.message)
         }
     }
 
@@ -45,8 +50,11 @@ const HomePage = () => {
                             <div className="wrap-appointment">
                                 <div className=" heading-section">
                                     <span className="subheading">Booking an Appointment</span>
+
+
+                                    {error ? error : message}
                                     <h2 className="title">Free Consultation</h2>
-                                    <form action="#" className="appointment" onSubmit={handleSubmit(onSubmit)}>
+                                    <form action="" className="appointment" onSubmit={handleSubmit(onSubmit)}>
                                         <div className="row ">
                                             <div className="col">
                                                 <div className="form-group">
@@ -55,8 +63,13 @@ const HomePage = () => {
                                                         name="name"
                                                         className="form-control"
                                                         placeholder="Your Name"
-                                                        {...register('name')}
+                                                        {...register('name', {
+                                                            required: true,
+                                                            isLength: ({ min: 6, max: 30 })
+                                                        })}
                                                     />
+                                                    {errors?.name?.type === "required" && <p className="form__error">Name không được để trống</p>}
+                                                    {errors?.name?.type === "isLength" && <p className="form__error">Tên phải dài từ 3 đến 30 kí tự</p>}
                                                 </div>
                                             </div>
                                             <div className="col">
@@ -66,8 +79,13 @@ const HomePage = () => {
                                                         name="phone"
                                                         className="form-control"
                                                         placeholder="Phone number"
-                                                        {...register('phone')}
+                                                        {...register('phone', {
+                                                            required: true,
+                                                            pattern: /((09|03|07|08|05)+([0-9]{8})\b)/g
+                                                        })}
                                                     />
+                                                    {errors?.phone?.type === "required" && <p className="form__error">Phone không được để trống</p>}
+                                                    {errors?.phone?.type === "pattern" && (<p className="form__error">Phone chưa đúng định dạng</p>)}
                                                 </div>
                                             </div>
                                             <div className="col">
@@ -77,8 +95,13 @@ const HomePage = () => {
                                                         name="email"
                                                         className="form-control"
                                                         placeholder="Email"
-                                                        {...register('email')}
+                                                        {...register('email', {
+                                                            required: true,
+                                                            pattern: /^([\w]*[\w\.]*(?!\.)@gmail.com)/
+                                                        })}
                                                     />
+                                                    {errors?.email?.type === "required" && <p className="form__error">Email không được để trống</p>}
+                                                    {errors?.email?.type === "pattern" && (<p className="form__error">Email chưa đúng định dạng</p>)}
                                                 </div>
                                             </div>
                                             <div className="col">
@@ -86,7 +109,9 @@ const HomePage = () => {
                                                     <div className="form-field">
                                                         <div className="select-wrap">
                                                             <div className="icon"><span className="fa fa-chevron-down"></span></div>
-                                                            <select name="service_id" id="" className="form-control" {...register('service_id')}>
+                                                            <select name="service_id" id="service_id" className="form-control" {...register('service_id',{
+                                                                required: true
+                                                            })}>
                                                                 <option value="">---Chọn dịch vụ---</option>
                                                                 {listService.map(item => (
                                                                     <>
@@ -94,9 +119,11 @@ const HomePage = () => {
                                                                     </>
                                                                 ))}
                                                             </select>
+                                                            {errors?.service_id?.type === "required" && <p className="form__error">Bạn chưa chọn dịch vụ</p>}
                                                         </div>
                                                     </div>
                                                 </div>
+                                               
                                             </div>
                                             <div className="col">
                                                 <div className="form-group">
@@ -106,8 +133,11 @@ const HomePage = () => {
                                                             name="repair_time"
                                                             className="form-control appointment_date"
                                                             placeholder="Date"
-                                                            {...register('repair_time')}
+                                                            {...register('repair_time', {
+                                                                required: true
+                                                            })}
                                                         />
+                                                        {errors?.repair_time?.type === "required" && <p className="form__error">Ngày không được để trống</p>}
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,8 +151,12 @@ const HomePage = () => {
                                                             placeholder="Time"
                                                             min="08:00"
                                                             max="18:00"
-                                                            {...register('correction_time')}
+                                                            {...register('correction_time', {
+                                                                required: true,
+                                                                
+                                                            })}
                                                         />
+                                                        {errors?.correction_time?.type === "required" && <p className="form__error">Giờ không được để trống</p>}
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,8 +168,11 @@ const HomePage = () => {
                                                             name="address"
                                                             className="form-control appointment_date"
                                                             placeholder="Địa chỉ"
-                                                            {...register('address')}
+                                                            {...register('address', {
+                                                                required : "true"
+                                                            })}
                                                         />
+                                                        {errors?.address?.type === "required" && <p className="form__error">Địa chỉ không được để trống</p>}
                                                     </div>
                                                 </div>
                                             </div>
@@ -147,15 +184,18 @@ const HomePage = () => {
                                                         rows="5"
                                                         placeholder='Mô tả lỗi'
                                                         className='form__desc-error'
-                                                        {...register('description_error')}
+                                                        {...register('description_error', {
+                                                            required: true,
+                                                        })}
                                                     >
-
                                                     </textarea>
+                                                    {errors?.description_error?.type === "required" && <p className="form__error" > Mô tả không được để trống</p>}
                                                 </div>
 
                                             </div>
                                             <div className="form-group">
                                                 <input type="submit" value="Send message" className="btn btn-secondary btn-submit-booking" />
+
                                             </div>
                                         </div>
                                     </form>
