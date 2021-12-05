@@ -24,6 +24,23 @@ const WaitForComfirmationPage = () => {
 
     getListBookingUser();
   }, []);
+
+  const handleCancel = () => {
+    
+  }
+  const remove = async (id) =>{
+    console.log(token,999)
+    const data = await axios.put(`${API}/booking/updateStatus/${id}`, {
+        params: {
+          status: "Wait for confirmation",
+        },
+        headers: {
+          Accept: "application/json",
+          ContentType: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  }
   console.log("aaaa", listAllBookingUser);
   return (
     <div>
@@ -55,7 +72,10 @@ const WaitForComfirmationPage = () => {
               >
                 Liên hệ
               </button>
-              <button style={{ background: `red`, color: `white` }} class="btn">
+              <button onClick={()=>{
+                console.log(item._id,item.id,999)
+                remove(item._id)
+              }} style={{ background: `red`, color: `white` }} className="btn">
                 Huỷ lịch
               </button>
             </div>

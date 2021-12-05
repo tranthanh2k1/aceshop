@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom'
+import { signOut, isAuthenticated } from '../../../api/auth'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginAction, getUserLocalStorage } from '../../../redux/actions/auth'
+
+
+
 
 const Header = () => {
+    const history = useHistory();
+    const { pathname } = useLocation();
+    const [isLogged, setLogged] = useState(false);
+    const { user } = isAuthenticated();
+    // useEffect(() => {
+    //     isAuthenticated && setLogged(true)
+    // }, [pathname, isLogged])
+    // const { error, isAuthenticated, user, message } = useSelector(state => state.auth)
+
+    // useEffect(() => {
+    //     isAuthenticated && dispatch(getUserLocalStorage(user))
+    // }, [user])
+
+    const dispatch = useDispatch()
+    // console.log("a",user);
+
     return (
         <>
             <div className="header-top">
@@ -64,12 +87,42 @@ const Header = () => {
                             <li className="nav-item"><Link to="gallery.html" className="nav-link">Gallery</Link></li>
                             <li className="nav-item"><Link to="blog.html" className="nav-link">Blog</Link></li>
                             <li className="nav-item"><Link to="contact.html" className="nav-link">Contact</Link></li>
+                            {pathname !== "/signin" && isLogged ? (
+                            
+                            <li className="nav-item dropdown"><a className="nav-link dropdown-toggle" id="pagesDropdown" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{user.username}</a>
+                                <div className="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
+                                    <a className="dropdown-item border-0 transition-link" href="/admin/dashboard">Dashboard</a>
+                                    <a className="dropdown-item border-0 transition-link" href="/" style={{ cursor: "pointer" }}
+                                        onClick={() =>
+                                            signOut(() => {
+                                                history.push("/");
+                                            })
+                                        }>Logout</a>
+                                </div>
+                            </li>
+                        
+                    ) : (
+                        <>
+                            <li className="nav-item dropdown"><a className="nav-link dropdown-toggle" id="pagesDropdown" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
+                                <div className="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
+                                    <a className="dropdown-item border-0 transition-link" href="/signin">Login</a>
+                                    <a className="dropdown-item border-0 transition-link" href="/signup">Register</a>
+
+                                </div>
+                            </li>
+                        </>
+                    )
+                    }
                         </ul>
                     </div>
-                    <div className="order-lg-last">
-                        <a href="#" className="btn btn-primary">Make an appointment</a>
-                    </div>
+                    {/* <div className="order-lg-last">
+                    <ul className="navbar-nav ml-auto">
+
+                        
+                    </ul>
+                    </div> */}
                 </div>
+                
             </div>
         </>
     );

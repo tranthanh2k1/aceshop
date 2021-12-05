@@ -1,7 +1,10 @@
-import React from 'react'
+
+import React from 'react';
 import Logo from '../../../assets/images/logo.png'
 
+
 const HeaderAdmin = () => {
+    
     return (
         <div className='admin__header'>
             <div className="admin__header-sidebar">
@@ -23,6 +26,7 @@ const HeaderAdmin = () => {
                     <i class="bi bi-three-dots"></i>
                 </div>
             </div>
+            
         </div>
     )
 }

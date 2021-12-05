@@ -24,7 +24,22 @@ const ConfirmBookingUser = () => {
 
     getListBookingUser();
   }, []);
-  console.log("aaaa", listAllBookingUser);
+  // console.log("aaaa", listAllBookingUser);
+
+  const remove =async (id) =>{
+    console.log(3443)
+    const data = await axios.put(`${API}/booking/updateStatus/${id}`, {
+      params: {
+        status: "Cancellation of booking",
+      },
+      headers: {
+        Accept: "appliaction/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
   return (
     <div>
       {listAllBookingUser.map((item) => (
@@ -55,7 +70,9 @@ const ConfirmBookingUser = () => {
               >
                 Liên hệ
               </button>
-              <button style={{ background: `red`, color: `white` }} class="btn">
+              <button onClick={()=>{
+                console.log("1")
+              }} style={{ background: `red`, color: `white` }} className="btn">
                 Huỷ lịch
               </button>
             </div>

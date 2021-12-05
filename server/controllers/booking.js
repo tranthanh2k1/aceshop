@@ -351,8 +351,8 @@ exports.getBookingStatusUser = (req, res) => {
 // cancelBooking
 exports.cancelBooking = async (req, res) => {
   const bookingId = req.params.bookingId;
-
-  const getBookingDB = await Booking.findOne({ _id: bookingId });
+  const user = req.user;
+  const getBookingDB = await Booking.findOne({ _id: bookingId, user_id: user._id });
   
   if (!getBookingDB)
     return res.status(404).json({

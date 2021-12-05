@@ -47,7 +47,9 @@ const CencelledBookedUserPage = () => {
             </div>
             <div class="product-fix-back">
               <div class="fix-back">
-                <button class="btn active">{item.repair_time}</button>
+                <button class="btn active">
+                    {item.repair_time}
+                    </button>
                 <button class="btn active">{item.correction_time}</button>
                 <button
                   style={{ background: `#01D28E`, color: `white` }}
@@ -55,9 +57,11 @@ const CencelledBookedUserPage = () => {
                 >
                   Liên hệ
                 </button>
-                <button style={{ background: `red`, color: `white` }} class="btn">
-                  Huỷ lịch
-                </button>
+                <button onClick={()=>{
+                console.log("1")
+              }} style={{ background: `red`, color: `white` }} className="btn">
+                Huỷ lịch
+              </button>
               </div>
             </div>
             <hr />

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { isAuthenticated } from '../../../../api/auth'
 import axios from 'axios'
 import { API } from '../../../../constants'
+import { remove } from '../../../../api/services'
 
 const ListAllBookedUserPage = () => {
     const [listAllBookingUser, setListAllBookingUser] = useState([])
@@ -55,8 +56,12 @@ const ListAllBookedUserPage = () => {
               >
                 Liên hệ
               </button>
-              <button style={{ background: `red`, color: `white` }} class="btn">
-                Huỷ lịch
+              <button 
+                onClick={() =>{
+                  remove(item._id);
+                }}
+                style={{ background: `red`, color: `white` }} class="btn">
+                  Huỷ lịch
               </button>
             </div>
           </div>

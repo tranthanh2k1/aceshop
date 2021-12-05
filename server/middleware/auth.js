@@ -4,8 +4,9 @@ exports.verifyToken = (req, res, next) => {
   const authHeader = req.header("Authorization");
 
   const token = authHeader && authHeader.split(" ")[1];
-
+    console.log(authHeader)
   if (!token) {
+    console.log(token,99);
     return res.status(401).json({
       success: false,
       message: "Không tìm thấy token",

@@ -36,3 +36,18 @@ export const isAuthenticated = () => {
     return false;
   }
 };
+
+export const signOut = (next) => {
+  if(typeof window != "undefined"){
+      localStorage.removeItem('user');
+      next();
+      return fetch(`${API}/logout`, {
+          method: 'GET',
+          headers:{
+              "Content-Type": "application/json"
+          }
+      })
+      .then(response => response.json())
+      .catch(error => console.log(error))
+  }
+}
