@@ -362,9 +362,7 @@ exports.getListBookingUser = async (req, res) => {
 exports.getBookingStatusUser = (req, res) => {
   const user = req.userId;
 
-  const { status } = req.body;
-
-  // console.log(status);
+  const status = req.query.status;
 
   if (
     status === "Wait for confirmation" ||
@@ -396,84 +394,46 @@ exports.getBookingStatusUser = (req, res) => {
   }
 };
 
-exports.listAllBookingStatus = (req, res) => {
-  const { status } = req.body;
+// cancelBooking
+exports.cancelBooking = async (req, res) => {
+  const bookingId = req.params.bookingId;
 
-  if (!status) {
-    return res.status(401).json({
+  const getBookingDB = await Booking.findOne({ _id: bookingId });
+
+  if (!getBookingDB)
+    return res.status(404).json({
       success: false,
-      message: "Bạn cần nhập đầy đủ thông tin",
+      message: "Không tìm thấy booking",
     });
-  }
 
   if (
-    status === "Wait for confirmation" ||
-    status === "Confirm" ||
-    status === "Fixing" ||
-    status === "Successful fix" ||
-    status === "Cancellation of booking"
-  ) {
-    Booking.find({ status })
-      .sort({ _id: -1 })
-      .exec((err, listBookingStatus) => {
-        if (err) {
-          return res.status(400).json({
-            success: false,
-            message: "Không tìm thấy đơn hàng nào",
-          });
-        }
-
-        res.status(200).json({
-          success: true,
-          message: "Lấy danh sách đơn hàng theo trạng thái thành công",
-          listBookingStatus,
-        });
-      });
-  } else {
-    return res.status(401).json({
+    getBookingDB.status !== "Wait for confirmation" &&
+    getBookingDB.status !== "Confirmed"
+  )
+    return res.status(500).json({
       success: false,
-      message: "Không tìm thấy trạng thái nào trùng với đơn hàng",
+      message: "trạng thái đơn hàng không hợp lệ",
+    });
+
+  let updatedStatusBookingAdmin = {
+    status: "Cancellation of booking",
+  };
+  updatedStatusBookingAdmin = await Booking.findOneAndUpdate(
+    { _id: bookingId },
+    updatedStatusBookingAdmin,
+    { new: true }
+  );
+
+  if (!updatedStatusBookingAdmin) {
+    return res.status(400).json({
+      success: false,
+      message: "Cancel booking fail",
     });
   }
-};
 
-exports.searchBookingUser = async (req, res) => {
-  const user = req.userId;
-
-  const search = req.query.code;
-
-  if (search) {
-    const bookingSearch = await Booking.findOne({
-      code_bill: search,
-      user_id: user._id,
-    });
-
-    if (!bookingSearch) {
-      return res.status(401).json({
-        success: false,
-        message: "Không tìm thấy đơn đặt lịch nào",
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      message: "Tìm kiếm đơn đặt lịch thành công",
-      bookingSearch,
-    });
-  } else {
-    Booking.find({}).exec((err, listBooking) => {
-      if (err) {
-        return res.status(401).json({
-          success: false,
-          message: "Không tìm thấy đơn đặt lịch nào",
-        });
-      }
-
-      res.status(200).json({
-        success: true,
-        message: "Tìm kiếm đơn đặt lịch thành công",
-        listBooking,
-      });
-    });
-  }
+  res.status(200).json({
+    success: true,
+    message: "Cancel booking success",
+    updatedStatusBookingAdmin,
+  });
 };

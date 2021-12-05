@@ -4,13 +4,13 @@ import axios from 'axios'
 import { listServiceAction } from '../../../redux/actions/services'
 import { useForm } from 'react-hook-form'
 import { API } from '../../../constants'
-import { getUserLocalStorage } from '../../../redux/actions/auth'
+import { isAuthenticated } from '../../../api/auth'
 
 const HomePage = () => {
     const { register, handleSubmit } = useForm()
 
     const { listService } = useSelector(state => state.service)
-    const { user } = useSelector(state => state.auth)
+    const { infoUser } = isAuthenticated()
 
     const dispatch = useDispatch()
 
@@ -18,14 +18,10 @@ const HomePage = () => {
         dispatch(listServiceAction())
     }, [])
 
-    useEffect(() => {
-        dispatch(getUserLocalStorage())
-    }, [])
-
     const onSubmit = async (dataForm, e) => {
         const dataBooking = {
             ...dataForm,
-            user_id: user && user._id
+            user_id: infoUser && infoUser._id
         }
 
         const { data } = await axios.post(`${API}/booking`, dataBooking)
