@@ -220,8 +220,7 @@ exports.updateBookingStatusAdmin = async (req, res) => {
       if (
         getBookingDB.status === "Wait for confirmation" ||
         getBookingDB.status === "Confirm" ||
-        getBookingDB.status === "Fixing" ||
-        getBookingDB.status === "Successful fix"
+        getBookingDB.status === "Fixing"
       ) {
         updatedStatusBookingAdmin = {
           status,
@@ -476,4 +475,55 @@ exports.searchBookingUser = async (req, res) => {
       });
     });
   }
+};
+
+exports.searchBookingAdmin = async (req, res) => {
+  const search = req.query.code;
+
+  const searchBooking = await Booking.findOne({ code_bill: search });
+
+  if (!searchBooking) {
+    return res.status(401).json({
+      success: false,
+      message: "Không tìm thấy đơn đặt lịch nào",
+    });
+  }
+
+  res.status(200).json({
+    success: true,
+    message: "Tìm kiếm đơn đặt lịch thành công",
+    searchBooking,
+  });
+};
+
+exports.filterByDate = (req, res) => {
+  const { date } = req.body;
+
+  if (!date) {
+    return res.status(400).json({
+      success: false,
+      message: "Bạn cần nhập đầy đủ thông tin",
+    });
+  }
+
+  Booking.find({
+    createdAt: {
+      $gte: new Date(new Date(date).setHours(00, 00, 00)),
+      $lt: new Date(new Date(date).setHours(23, 59, 59)),
+    },
+  })
+    .then((data) => {
+      res.status(200).json({
+        success: false,
+        message: "Lấy đơn đặt lịch thành công",
+        booking: data,
+      });
+    })
+    .catch((error) => {
+      console.log("error", error);
+      return res.status(401).json({
+        success: false,
+        message: "Lấy đơn đặt lịch thất bại",
+      });
+    });
 };
