@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { isAuthenticated } from '../../../../api/auth'
 import axios from 'axios'
 import { API } from '../../../../constants'
+import Moment from 'react-moment'
 
 const ListAllBookedUserPage = () => {
   const [listAllBookingUser, setListAllBookingUser] = useState([])
@@ -47,8 +48,12 @@ const ListAllBookedUserPage = () => {
           </div>
           <div class="product-fix-back">
             <div class="fix-back">
-              <button type="time" class="btn active">{item.repair_time}</button>
-              <button class="btn active">{item.correction_time}</button>
+              <button type="time" class="btn active">
+                Thời gian sửa: <Moment format="hh:mm' DD/MM/YYYY">
+                  {item.repair_time}
+                </Moment>
+              </button>
+              <button class="btn active">Ca sửa: {item.correction_time}</button>
               <button
                 style={{ background: `#01D28E`, color: `white` }}
                 class="btn "

@@ -47,25 +47,24 @@ const BookedUserPage = ({ children }) => {
             </div>
             <div className="main-right">
               <div className="booking-nav">
-                <a className="active" href="">
-                  <Link to="/user/booked">Tất cả</Link>
-                </a>
-                <a href="">
-                  {" "}
-                  <Link to="/user/booked/type1">Chờ xác nhận</Link>
-                </a>
-                <a href="">
-                  <Link to="/user/booked/type2">Xác nhận</Link>
-                </a>
-                <a href="">
-                  <Link to="/user/booked/type3">Đang sửa</Link>
-                </a>
-                <a href="">
-                  <Link to="/user/booked/type4">Sửa thành công</Link>
-                </a>
-                <a href="">
-                  <Link to="/user/booked/type5">Hủy lịch</Link>
-                </a>
+                {/* <a className="active" href=""> */}
+                <Link to="/user/booked">Tất cả</Link>
+                {/* </a> */}
+                {/* <a href=""> */}
+                <Link to="/user/booked/type1">Chờ xác nhận</Link>
+                {/* </a> */}
+                {/* <a href=""> */}
+                <Link to="/user/booked/type2">Xác nhận</Link>
+                {/* </a> */}
+                {/* <a href=""> */}
+                <Link to="/user/booked/type3">Đang sửa</Link>
+                {/* </a> */}
+                {/* <a href=""> */}
+                <Link to="/user/booked/type4">Sửa thành công</Link>
+                {/* </a> */}
+                {/* <a href=""> */}
+                <Link to="/user/booked/type5">Hủy lịch</Link>
+                {/* </a> */}
               </div>
               <div className="form">
                 <span>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { isAuthenticated } from '../../../../api/auth'
 import axios from 'axios'
 import { API } from '../../../../constants'
+import Moment from 'react-moment'
 
 const SuccessfullBookedPage = () => {
   const [listAllBookingUser, setListAllBookingUser] = useState([]);
@@ -31,7 +32,7 @@ const SuccessfullBookedPage = () => {
     <div>
       {listAllBookingUser.map((item) => (
         <div class="booking-box">
-          <p class="status">Trạng thái : Xác nhận </p>
+          <p class="status">Trạng thái : {item.status} </p>
           <div class="content">
             <div class="desc">
               <div class="desc-content">
@@ -49,8 +50,12 @@ const SuccessfullBookedPage = () => {
           </div>
           <div class="product-fix-back">
             <div class="fix-back">
-              <button class="btn active">{item.repair_time}</button>
-              <button class="btn active">{item.correction_time}</button>
+              <button type="time" class="btn active">
+                Thời gian sửa: <Moment format="hh:mm' DD/MM/YYYY">
+                  {item.repair_time}
+                </Moment>
+              </button>
+              <button class="btn active">Ca sửa: {item.correction_time}</button>
               <button
                 style={{ background: `#01D28E`, color: `white` }}
                 class="btn "

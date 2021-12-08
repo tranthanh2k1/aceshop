@@ -1,12 +1,14 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { Table } from 'reactstrap';
-import { getListBookingAll, listAllBookingStatusAction } from '../../../redux/actions/booking-admin';
+import { adminFilterByDateBookingAction, getListBookingAll, listAllBookingStatusAction } from '../../../redux/actions/booking-admin';
 import Moment from 'react-moment';
 
 const ListBooking = () => {
-    const { listBooking, totalPage } = useSelector(state => state.bookingAdmin)
+    const [date, setDate] = useState('')
+
+    const { listBooking, totalPage, error } = useSelector(state => state.bookingAdmin)
 
     const dispatch = useDispatch()
 
@@ -77,10 +79,11 @@ const ListBooking = () => {
     ]
 
     const paginationRef = useRef(null)
+    const inputDateRef = useRef(date)
 
     const handleSelectStatus = (e) => {
         if (e.target.value === 'all') {
-            paginationRef.current.style.display = 'block'
+            // paginationRef.current.style.display = 'block'
             return dispatch(getListBookingAll(1))
         }
 
@@ -90,16 +93,33 @@ const ListBooking = () => {
 
         dispatch(listAllBookingStatusAction(dataReq))
 
-        paginationRef.current.style.display = 'none'
+        setDate('')
+        inputDateRef.current.value = ""
+
+        // paginationRef.current.style.display = 'none'
+    }
+
+    const handleDate = e => {
+        setDate(e.target.value)
+    }
+
+    const handleFilterDateOrder = () => {
+        dispatch(adminFilterByDateBookingAction(date))
     }
 
     return (
         <div>
+            {error && alert(error)}
             <h3 className='admin__page-title'>Danh sách đơn đặt lịch</h3>
-            <form action='/admin/booking/search'>
+            <form action='/admin/booking/search' className='my-4'>
                 <input type="text" placeholder='Tìm kiếm...' name="code" />
-                <button type='submit'>TÌm kiếm</button>
+                <button type='submit' className='btn btn-primary mx-2'>TÌm kiếm</button>
             </form>
+            <div className='my-4'>
+                <h5>Lọc đơn đặt lịch theo ngày: {date}</h5>
+                <input type="date" onChange={handleDate} ref={inputDateRef} />
+                <button onClick={handleFilterDateOrder} className='btn btn-success mx-2'>Lọc</button>
+            </div>
             <select
                 className="form-select my-4"
                 name="status"
@@ -149,38 +169,40 @@ const ListBooking = () => {
                     ))}
                 </tbody>
             </Table>
-            <nav aria-label="Page navigation example" ref={paginationRef}>
-                <ul className="pagination">
-                    <li className="page-item">
-                        {query > 1 && (
-                            <Link
-                                className='page-link'
-                                to={`/admin/booking/list?page=${Number(query) - 1}`}
-                            >
-                                Previous
-                            </Link>
-                        )}
-                    </li>
-                    {Array(totalPage).fill(1).map((item, index) => (
-                        <li className="page-item" key={index}>
-                            <Link
-                                className="page-link"
-                                to={`/admin/booking/list?page=${index + 1}`}
-                            >{index + 1}</Link>
+            {totalPage && (
+                <nav aria-label="Page navigation example" ref={paginationRef}>
+                    <ul className="pagination">
+                        <li className="page-item">
+                            {query > 1 && (
+                                <Link
+                                    className='page-link'
+                                    to={`/admin/booking/list?page=${Number(query) - 1}`}
+                                >
+                                    Previous
+                                </Link>
+                            )}
                         </li>
-                    ))}
-                    <li className="page-item">
-                        {query < totalPage && (
-                            <Link
-                                className="page-link"
-                                to={`/admin/booking/list?page=${Number(query) + 1}`}
-                            >
-                                Next
-                            </Link>
-                        )}
-                    </li>
-                </ul>
-            </nav>
+                        {Array(totalPage).fill(1).map((item, index) => (
+                            <li className="page-item" key={index}>
+                                <Link
+                                    className="page-link"
+                                    to={`/admin/booking/list?page=${index + 1}`}
+                                >{index + 1}</Link>
+                            </li>
+                        ))}
+                        <li className="page-item">
+                            {query < totalPage && (
+                                <Link
+                                    className="page-link"
+                                    to={`/admin/booking/list?page=${Number(query) + 1}`}
+                                >
+                                    Next
+                                </Link>
+                            )}
+                        </li>
+                    </ul>
+                </nav>
+            )}
         </div >
     )
 }

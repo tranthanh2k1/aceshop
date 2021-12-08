@@ -24,24 +24,23 @@ const DetailBookingPage = () => {
 
     useEffect(() => {
         if (detailBooking && detailBooking.status === "Wait for confirmation") {
-            setIsDisableWaitConfirmation('')
+            // setIsDisableWaitConfirmation('')
             setIsDisableConfirm('')
             setIsDisableCanellation('')
         }
 
         if (detailBooking && detailBooking.status === "Confirm") {
-            setIsDisableConfirm('')
+            // setIsDisableConfirm('')
             setIsDisableFixing('')
             setIsDisableCanellation('')
         }
         if (detailBooking && detailBooking.status === "Fixing") {
-            setIsDisableFixing('')
+            // setIsDisableFixing('')
             setDIsableSuccessfulFix('')
             setIsDisableCanellation('')
         }
         if (detailBooking && detailBooking.status === "Successful fix") {
             setDIsableSuccessfulFix('')
-            setIsDisableCanellation('')
         }
         if (detailBooking && detailBooking.status === "Cancellation of booking") {
             setIsDisableCanellation('')

@@ -7,6 +7,10 @@ const {
   listBooking,
   detailBooking,
   cancelBooking,
+  listAllBookingStatus,
+  searchBookingUser,
+  searchBookingAdmin,
+  filterByDate,
 } = require("../controllers/booking.js");
 const { verifyToken, isAdmin } = require("../middleware/auth.js");
 const router = express.Router();
@@ -21,6 +25,9 @@ router.put(
   updateBookingStatusAdmin
 );
 // router.post("/booking/status", listAllBookingStatus);
+router.post("/booking/status", listAllBookingStatus);
+router.get("/booking/admin/search", verifyToken, isAdmin, searchBookingAdmin);
+router.post("/booking/filterByDate", filterByDate);
 
 // api user
 router.post("/booking", create);
