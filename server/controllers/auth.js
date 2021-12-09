@@ -1,6 +1,11 @@
 const User = require("../models/user.js");
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
+const { sendMail } = require("../helps/mail-config")
+// const mailgun = require("mailgun-js");
+// const DOMAIN = 'sandboxf26a5c38b52e4da68cd059e6c4d2daba.mailgun.org';
+// const mg =  mailgun({apikey: process.env.MAILGUN_APIKEY, domain: DOMAIN});
+
 
 exports.register = async (req, res) => {
   const { username, email, password } = req.body;
@@ -107,3 +112,31 @@ exports.login = async (req, res) => {
     });
   }
 };
+
+
+exports.forgotPassword = (req, res) => {
+  const {email} = req.body;
+  console.log(req.body);
+  User.findOne({email}, (err, user) => {
+    if(err || !user){
+      return res.status(400).json({error:"User with this email does not exists"})
+    }
+    
+    const token = jwt.sign({_id: user._id}, process.env.RESET_PASSWORD_KEY, {expiresIn: '20m'})
+    
+    return user.updateOne({resetLink: token}, async function(err, success) {
+      if(err){
+        return res.status(400).json({error: "reset password link error"});
+      } else{
+        const template = `
+        <h2>Please click on given link to reset you password </h2>
+        <p>code: 123434</p>
+        `
+        const result = await sendMail(email, template);
+        
+        console.log('to do send email', result)
+      }
+    })
+
+  })
+}

@@ -17,6 +17,10 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    resetLink: {
+      type: String,
+      required: true,
+    },
     status: {
       type: Boolean,
       default: false,
