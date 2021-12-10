@@ -19,23 +19,22 @@ export const createUserAction = (dataForm) => async (dispatch) => {
 };
 
 export const listUserAction = () => async (dispatch) => {
-    const data = await list();
+    const { data } = await list();
+    console.log("listaction", data);
 
     dispatch({
         type: "LIST_USERS",
-        payload :data.listUserParent,
+        payload: data,
     });
 };
 
 export const removeUserAction = (id) => async (dispatch) => {
-    const data = await remove(id);
+    const { data } = await remove(id);
+    console.log("data:", data);
 
     dispatch({
         type: "DELETE_USERS",
-        payload:{
-            data: data.user,
-            message : data.message,
-        },
+        payload: data
     });
 };
 
@@ -46,12 +45,12 @@ export const updateUserAction = (id, dataForm) => async (dispatch) => {
             type: "UPDATE_USERS",
             payload: {
                 data: data.updateUser,
-                message : data.message,
+                message: data.message,
             },
         });
     } else {
         dispatch({
-            type :"CALL_API_USERS_FAIL",
+            type: "CALL_API_USERS_FAIL",
             payload: data.message,
         });
     }

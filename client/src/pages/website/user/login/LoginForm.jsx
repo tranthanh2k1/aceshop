@@ -33,7 +33,7 @@ const LoginForm = () => {
     return (
         <div className="signup">
             {message ? message : <span className='form__error'>{error}</span>}
-            {redirectUser()}
+            {redirectUser()}    
             <h2 className="signup__heading">Đăng nhập</h2>
             <p className="signin__text">Nếu bán chưa có tài khoản, <Link to="/register" className="signup__link">Đăng ký tại đây</Link></p>
             <form action="" className="signup__form" onSubmit={handleSubmit(onSubmit)}>

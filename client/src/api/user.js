@@ -1,40 +1,40 @@
-import {API} from '../constants';
+import { API } from '../constants';
 
 export const list = () => {
     return fetch(`${API}/listUser`, {
         method: "GET",
         headers: {
-            Accept : "appliaction/json",
+            Accept: "appliaction/json",
             "Content-Type": 'application/json',
         },
     })
-    .then((response) => response.json())
-    .catch((error) => console.log("error", error));
+        .then((response) => response.json())
+        .catch((error) => console.log("error", error));
 };
 
 export const create = (data) => {
     return fetch(`${API}/service`, {
-        method : "POST",
+        method: "POST",
         headers: {
-            Accept : "application/json",
+            Accept: "application/json",
         },
         body: JSON.stringify(data),
     })
-    .then((response) => response.json())
-    .catch((error) => console.log("error", error));
+        .then((response) => response.json())
+        .catch((error) => console.log("error", error));
 }
 
 export const update = (id, data) => {
     return fetch(`${API}/updateUser/${id}`, {
         method: "PUT",
-        headers : {
+        headers: {
             Accept: 'application/json',
-            "Content-Type" : "application/json"
+            "Content-Type": "application/json"
         },
-        body : JSON.stringify(data),
+        body: JSON.stringify(data),
     })
-    .then((response) => response.json())
-    .catch((error) => console.log('error', error));
+        .then((response) => response.json())
+        .catch((error) => console.log('error', error));
 }
 
 export const remove = (id) => {
@@ -42,9 +42,9 @@ export const remove = (id) => {
         method: "DELETE",
         headers: {
             Accept: "application/json",
-            "Content-Type" : "application/json",
+            "Content-Type": "application/json",
         },
     })
-    .then((response) => response.json())
-    .catch((error) => console.log("error", error));
+        .then((response) => response.json())
+        .catch((error) => console.log("error", error));
 };

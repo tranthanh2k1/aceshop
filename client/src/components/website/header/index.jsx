@@ -27,7 +27,10 @@ const Header = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col">
-                            <a className="navbar-brand" href="index.html">Chiropractic</a>
+                            {/* <a className="navbar-brand" href="index.html">Chiropractic</a> */}
+                            <Link className="navbar-brand" to="/">
+                                <img src="../assets/css/images/ace.png" alt="" />
+                            </Link>
                         </div>
                         <div className="col">
                             <div className="row">
@@ -50,25 +53,20 @@ const Header = () => {
             </div>
             <div className="navbar">
                 <div className="container test" id="test">
-                    {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="fa fa-bars" /> Menu 141545484
-                    </button> */}
-
                     <div className="navbar-collapse">
                         <ul className="navbar-nav">
                             <li className="nav-item active"><Link to="/" className="nav-link">Home</Link></li>
-                            <li className="nav-item"><Link to="about.html" className="nav-link">About</Link></li>
-                            <li className="nav-item"><Link to="team.html" className="nav-link">Team</Link></li>
-                            <li className="nav-item"><Link to="services.html" className="nav-link">Services</Link></li>
-                            <li className="nav-item"><Link to="department.html" className="nav-link">Departments</Link></li>
-                            <li className="nav-item"><Link to="gallery.html" className="nav-link">Gallery</Link></li>
-                            <li className="nav-item"><Link to="blog.html" className="nav-link">Blog</Link></li>
-                            <li className="nav-item"><Link to="contact.html" className="nav-link">Contact</Link></li>
+                            <li className="nav-item"><Link to="about.html" className="nav-link">Về chúng tôi</Link></li>
+                            <li className="nav-item"><Link to="" className="nav-link">Dịch vụ</Link></li>
+                            <li className="nav-item"><Link to="/quote" className="nav-link">Báo giá</Link></li>
+                            <li className="nav-item"><Link to="" className="nav-link">Blog</Link></li>
+                            <li className="nav-item"><Link to="/content" className="nav-link">Liên hệ</Link></li>
                         </ul>
                     </div>
                     <div className="order-lg-last">
                         <Link to="/register" className="btn btn-primary">Register</Link>
                     </div>
+                    
                 </div>
             </div>
         </>

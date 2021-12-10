@@ -51,7 +51,6 @@ const HomePage = () => {
                                 <div className=" heading-section">
                                     <span className="subheading">Booking an Appointment</span>
 
-
                                     {error ? error : message}
                                     <h2 className="title">Free Consultation</h2>
                                     <form action="" className="appointment" onSubmit={handleSubmit(onSubmit)}>
@@ -195,7 +194,6 @@ const HomePage = () => {
                                             </div>
                                             <div className="form-group">
                                                 <input type="submit" value="Send message" className="btn btn-secondary btn-submit-booking" />
-
                                             </div>
                                         </div>
                                     </form>

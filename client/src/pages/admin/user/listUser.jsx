@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 const ListUserPage = () => {
-  
-    const { listUser } = useSelector(state => state.user)
 
+    const { listUser } = useSelector(state => state.user)
+    // console.log(listUser);
     const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(listUserAction())
     }, [])
@@ -29,7 +30,7 @@ const ListUserPage = () => {
                     <th>Action</th>
                 </thead>
                 <tbody>
-                    {listUser && listUser.map((item, index) => {
+                    {listUser && listUser.map((item, index) => (
                         <tr key={index}>
                             <th scope="row">{index}</th>
                             <td>{item.username}</td>
@@ -40,7 +41,7 @@ const ListUserPage = () => {
                                 <button onClick={() => handleRemove(item._id)} className='btn btn-danger ml-1'>Delete</button>
                             </td>
                         </tr>
-                    })}
+                    ))}
                 </tbody>
             </Table>
         </div>

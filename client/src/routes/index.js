@@ -22,6 +22,8 @@ import EditUserPage from "../pages/admin/user/editUser";
 import HomePage from "../pages/website/home";
 import LoginPage from "../pages/website/user/login";
 import RegisterPage from "../pages/website/user/register";
+import QuotePage from "../pages/website/quote/QuotePage";
+
 import ListAllBookedUserPage from "../pages/website/user/booked";
 import ListBookedFixingUser from "../pages/website/user/booked/fixing";
 import BookedUserPage from "../pages/website/user/booked/bookedUserRoute";
@@ -30,6 +32,7 @@ import SuccessfullBookedPage from "../pages/website/user/booked/successfull";
 import ConfirmBookingUser from "../pages/website/user/booked/confirm";
 import CencelledBookedUserPage from "../pages/website/user/booked/cencelled";
 import SearchBookingAdmin from "../pages/admin/booking/search-booking";
+import ContentPage from "../pages/website/content/ContentPage";
 
 const Routes = () => {
   return (
@@ -72,6 +75,9 @@ const Routes = () => {
               <Route exact path="/admin/booking/search">
                 <SearchBookingAdmin />
               </Route>
+               
+               
+            
             </Switch>
           </LayoutAdmin>
         </Route>
@@ -87,6 +93,12 @@ const Routes = () => {
               </Route>
               <Route exact path="/login">
                 <LoginPage />
+              </Route>
+              <Route exact path="/quote">
+                 <QuotePage/>
+              </Route>
+              <Route exact path="/content">
+                 <ContentPage/>
               </Route>
               <BookedUserPage>
                 <Switch>

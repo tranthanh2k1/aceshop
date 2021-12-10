@@ -8,11 +8,12 @@ router.get('/secret/:userId', (req, res) => {
         user: req.profile
     })
 });
-router.param('idUser', userById);
 router.get('/listUser', showListUser);
 router.get('/detailUser/:idUser', detailUser);
 router.post('/addUser', addUser);
 router.put('/updateUser/:idUser', updateUser);
 router.delete('/deleteUser/:idUser', removeUser)
+
+router.param('idUser', userById);
 
 module.exports = router;

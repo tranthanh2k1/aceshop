@@ -1,10 +1,10 @@
 const User = require('../models/user.js')
 
-exports.userById = (req, res, id, next) => {
-    User.findById(id).exec((err, data) => {
-        if(err || !data) {
+exports.userById = (req, res, next, iduser) => {
+    User.findById(iduser, (err, data) => {
+        if (err || !data) {
             return res.status(401).json({
-                err : "Không tìm thấy user"
+                err: "Không tìm thấy user"
             })
         }
         req.profile = data;
@@ -15,36 +15,35 @@ exports.userById = (req, res, id, next) => {
 exports.addUser = (req, res, next) => {
     let user = new User(req.body);
     user.save((err, data) => {
-        if(err || !data) {
+        if (err || !data) {
             return res.status(400).json({
-                status : false,
-                error : "Thêm tài khoản thất bại"
+                status: false,
+                error: "Thêm tài khoản thất bại"
             })
         }
         res.status(200).json({
-            status :true ,
-            message : "Thêm tài khoản thành công",
+            status: true,
+            message: "Thêm tài khoản thành công",
             data
         });
     })
 }
 
 exports.showListUser = (req, res) => {
-    if(req.query.username) {
-        User.find({username: req.query.username}, function(err, data) {
-            if(err) {
-                console.log(err);
-            }
-            else {
-                res.json(data)
-            }
+    User.find({}).exec((err, data) => {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: "Khog tim thay user nao"
+            })
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Lay list user thanh cong",
+            data
         })
-    } else {
-        User.find({}).then((user) => {
-            user = user.map((user) => user.toObject());
-            res.json(user);
-        })
-    }
+    })
 }
 
 exports.detailUser = (req, res, next) => {
@@ -53,36 +52,38 @@ exports.detailUser = (req, res, next) => {
     return res.json(req.profile);
 }
 
-exports.updateUser = (req, res ) => {
+exports.updateUser = (req, res) => {
     User.findOneAndUpdate(
         { _id: req.profile.id },
-        { $set: req.body } ,
-        { new : true }, 
-        (err , data) => {
+        { $set: req.body },
+        { new: true },
+        (err, data) => {
             if (err) {
                 return res.status(400).json({
-                    error : "Không thể update user"
+                    error: "Không thể update user"
                 })
             }
             req.profile.hashed_password,
-            req.profile.salt,
-            res.json(user)
+                req.profile.salt,
+                res.json(user)
         }
     );
 };
 
 exports.removeUser = (req, res) => {
     let user = req.profile;
+
     user.remove((err, data) => {
-        if(err) {
-            res.status(400).json({
-                status : false,
-                error : "Không thể xoá user !!"
+        if (err) {
+            return res.status(401).json({
+                success: false,
+                message: "Xoas user that bai"
             })
         }
-        return res.status(200).json({
-            status :true,
-            message : "Xoá thành công user ",
+
+        res.status(200).json({
+            success: true,
+            message: "Xoas user thanh cong",
             data
         })
     })

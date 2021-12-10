@@ -48,6 +48,15 @@ const bookingAdminReducer = (state = initialState, action) => {
         message: "",
         error: "",
       };
+    case "FILTER_DATE_BOOKING":
+      return {
+        ...state,
+        listBooking: payload,
+        detailBooking: null,
+        totalPage: null,
+        message: "",
+        error: "",
+      };
     default:
       return state;
   }

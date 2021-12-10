@@ -14,27 +14,27 @@ const userReducer = (state = initialState, action) => {
         case "ADD_USERS":
             return {
                 ...state,
-                listUser: [...state.listUser,action.payload.data ],
-                message : action.payload.message,
+                listUser: [...state.listUser, action.payload.data],
+                message: action.payload.message,
                 error: "",
             };
         case "DELETE_USERS":
             return {
                 ...state,
                 listUser: state.listUser.filter(
-                    (item) => item._id !== action.payload.data._id
+                    (item) => item._id !== action.payload._id
                 ),
-                message: action.payload.message,
                 error: "",
+                message: ""
             };
-        case "UPDATE_USERS" :
+        case "UPDATE_USERS":
             return {
                 ...state,
                 listUser: [
-                    ...state.listUser, 
+                    ...state.listUser,
                     action.payload.data
                 ],
-                message : action.payload.message,
+                message: action.payload.message,
                 error: "",
             };
         case "CALL_API_USERS_FAIL":
@@ -43,7 +43,7 @@ const userReducer = (state = initialState, action) => {
                 message: "",
                 error: action.payload,
             };
-        default: 
+        default:
             return state;
     }
 }
