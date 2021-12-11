@@ -130,7 +130,7 @@ exports.forgotPassword = (req, res) => {
       } else{
         const template = `
         <h2>Please click on given link to reset you password </h2>
-        <p>code: 123434</p>
+        <a></a>
         `
         const result = await sendMail(email, template);
         
