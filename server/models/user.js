@@ -19,7 +19,7 @@ const UserSchema = new Schema(
     },
     resetLink: {
       type: String,
-      required: true,
+      required: false,
     },
     status: {
       type: Boolean,
@@ -30,7 +30,7 @@ const UserSchema = new Schema(
       default: 0,
     },
     phone: {
-      type: Number,
+      type: String,
     },
     address: {
       type: String,

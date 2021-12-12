@@ -1,7 +1,7 @@
 const nodemailer =  require('nodemailer'); 
 module.exports.sendMail = async (email, template) => {
 
-    return new Promise((resolve, reject) => {
+return new Promise((resolve, reject) => {
         if(!email) {
             console.log('error',)
             reject('error email')
