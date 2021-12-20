@@ -41,7 +41,6 @@ const DetailBookingPage = () => {
         }
         if (detailBooking && detailBooking.status === "Successful fix") {
             setDIsableSuccessfulFix('')
-            setIsDisableCanellation('')
         }
         if (detailBooking && detailBooking.status === "Cancellation of booking") {
             setIsDisableCanellation('')

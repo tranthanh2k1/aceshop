@@ -8,8 +8,16 @@ const {
   detailBooking,
   listAllBookingStatus,
   searchBookingUser,
+
+  Validate,
+  userValidationResult,
+  checkMail,
+  checkPhone,
+  searchBookingAdmin,
+  filterByDate,
+
 } = require("../controllers/booking.js");
-const { verifyToken, isAdmin } = require("../middleware/auth.js");
+const { verifyToken, isAdmin, } = require("../middleware/auth.js");
 const router = express.Router();
 
 // api admin
@@ -22,6 +30,8 @@ router.put(
   updateBookingStatusAdmin
 );
 router.post("/booking/status", listAllBookingStatus);
+router.get("/booking/admin/search", verifyToken, isAdmin, searchBookingAdmin);
+router.post("/booking/filterByDate", filterByDate);
 
 // api user
 router.post("/booking", create);

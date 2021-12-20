@@ -16,5 +16,4 @@ router.put("/service/:id", update);
 router.delete("/service/:id", remove);
 
 router.param("id", serviceId);
-
 module.exports = router;

@@ -6,15 +6,24 @@ import {
 } from "react-router-dom";
 import LayoutAdmin from "../layouts/admin";
 import LayoutWebsite from "../layouts/website";
+
 import AdminDashboard from "../pages/admin/dashboard";
 import AddServicePage from "../pages/admin/services/add-service";
 import ListServicePage from "../pages/admin/services";
+import EditServicePage from "../pages/admin/services/edit-service";
+
+import ListBooking from "../pages/admin/booking";
+import DetailBookingPage from "../pages/admin/booking/detail-booking";
+
+import ListUserPage from "../pages/admin/user/listUser";
+import AddUserPage from "../pages/admin/user/addUser";
+import EditUserPage from "../pages/admin/user/editUser";
+
 import HomePage from "../pages/website/home";
 import LoginPage from "../pages/website/user/login";
 import RegisterPage from "../pages/website/user/register";
-import EditServicePage from "../pages/admin/services/edit-service";
-import ListBooking from "../pages/admin/booking";
-import DetailBookingPage from "../pages/admin/booking/detail-booking";
+import QuotePage from "../pages/website/quote/QuotePage";
+
 import ListAllBookedUserPage from "../pages/website/user/booked";
 import ListBookedFixingUser from "../pages/website/user/booked/fixing";
 import BookedUserPage from "../pages/website/user/booked/bookedUserRoute";
@@ -23,6 +32,7 @@ import SuccessfullBookedPage from "../pages/website/user/booked/successfull";
 import ConfirmBookingUser from "../pages/website/user/booked/confirm";
 import CencelledBookedUserPage from "../pages/website/user/booked/cencelled";
 import SearchBookingAdmin from "../pages/admin/booking/search-booking";
+import ContentPage from "../pages/website/content/ContentPage";
 
 const Routes = () => {
   return (
@@ -52,12 +62,26 @@ const Routes = () => {
               <Route exact path="/admin/booking/detail/:id">
                 <DetailBookingPage />
               </Route>
+
+              <Route exact path="/admin/user/listUser">
+                <ListUserPage title="User" />
+              </Route>
+              <Route exact path="/admin/user/addUser">
+                <AddUserPage />
+              </Route>
+              <Route exact path="/admin/user/edit/:id">
+                <EditUserPage />
+              </Route>
               <Route exact path="/admin/booking/search">
                 <SearchBookingAdmin />
               </Route>
+               
+               
+            
             </Switch>
           </LayoutAdmin>
         </Route>
+
         <Route path="/">
           <LayoutWebsite>
             <Switch>
@@ -69,6 +93,12 @@ const Routes = () => {
               </Route>
               <Route exact path="/login">
                 <LoginPage />
+              </Route>
+              <Route exact path="/quote">
+                 <QuotePage/>
+              </Route>
+              <Route exact path="/content">
+                 <ContentPage/>
               </Route>
               <BookedUserPage>
                 <Switch>

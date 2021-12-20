@@ -21,8 +21,7 @@ const ListServicePage = () => {
     return (
         <div>
             <h3 className='admin__page-title'>Danh sách dịch vụ</h3>
-            <Table
-            >
+            <Table>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -46,7 +45,5 @@ const ListServicePage = () => {
                 </tbody>
             </Table>
         </div>
-    )
-}
-
+    )}
 export default ListServicePage
